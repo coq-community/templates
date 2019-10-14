@@ -22,7 +22,7 @@ Files ending with `.mustache` have values to fill in to use (and the
 This can (and should) be done automatically using a mustache command-line (many
 `mustache` implementations are available from the [Mustache website](https://mustache.github.io).
 To do so, you must write a `meta.yml` file containing the requested values.
-For instance, the [example files](https://github.com/coq-community/manifesto) were generated in the
+For instance, the [example files](https://github.com/coq-community/manifesto/tree/master/templates/examples) were generated in the
 following way:
 
 ``` shell
