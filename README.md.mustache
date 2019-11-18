@@ -1,6 +1,11 @@
 # {{& fullname }}
 
+{{# travis }}
 [![Travis][travis-shield]][travis-link]
+{{/ travis }}
+{{# circleci }}
+[![CircleCI][circleci-shield]][circleci-link]
+{{/ circleci }}
 {{# community }}
 [![Contributing][contributing-shield]][contributing-link]
 [![Code of Conduct][conduct-shield]][conduct-link]
@@ -10,8 +15,14 @@
 [![DOI][doi-shield]][doi-link]
 {{/ paper }}
 
+{{# travis }}
 [travis-shield]: https://travis-ci.com/{{ organization }}/{{ shortname }}.svg?branch=master
 [travis-link]: https://travis-ci.com/{{ organization }}/{{ shortname }}/builds
+{{/ travis }}
+{{# circleci }}
+[circleci-shield]: https://circleci.com/gh/{{ organization }}/{{ shortname }}.svg?style=svg
+[circleci-link]:   https://circleci.com/gh/{{ organization }}/{{ shortname }}
+{{/ circleci }}
 
 {{# community }}
 [contributing-shield]: https://img.shields.io/badge/contributions-welcome-%23f7931e.svg
