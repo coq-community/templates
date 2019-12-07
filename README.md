@@ -39,15 +39,10 @@ done
 You can generate the standard files from the templates,
 provided you already have written `meta.yml`, like this:
 ```shell
+cd <your_coq_project> && cd ..
 git clone git@github.com:coq-community/templates.git
-cd <your_coq_project>
-ln -sf ../templates/{,.}*.mustache .
-cat << . > ./generate.sh
-for f in {,.}*.mustache
-do mustache meta.yml $f > ${f%.mustache}
-done
-.
-sh -x ./generate.sh
+cd -
+../templates/generate.sh
 git add <the_generated_files>
 ```
 Yes, keeping generated files in VCS isn't ideal, but `README.md` has to be there,
