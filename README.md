@@ -35,5 +35,19 @@ for dir in examples/*; do
   echo "$dir/coq-${dir#examples/}.opam"
 done
 ```
+
+You can generate the standard files from the templates,
+provided you already have written `meta.yml`, like this:
+```shell
+cd <your_coq_project> && cd ..
+git clone git@github.com:coq-community/templates.git
+cd -
+../templates/generate.sh
+git add <the_generated_files>
+```
+Yes, keeping generated files in VCS isn't ideal, but `README.md` has to be there,
+and generally this is a common practice with using Autotools, for example.
+To get the `mustache` utility, in e.g. NixOS you could `nix-env -i mustache-go`.
+
 You may find documentation, advice and guidelines on how to maintain a project
 in the [wiki](https://github.com/coq-community/manifesto/wiki).
