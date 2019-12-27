@@ -11,9 +11,9 @@
 [![Code of Conduct][conduct-shield]][conduct-link]
 [![Gitter][gitter-shield]][gitter-link]
 {{/ community }}
-{{# paper }}
+{{# doi }}
 [![DOI][doi-shield]][doi-link]
-{{/ paper }}
+{{/ doi }}
 
 {{# travis }}
 [travis-shield]: https://travis-ci.com/{{ organization }}/{{ shortname }}.svg?branch=master
@@ -35,17 +35,12 @@
 [gitter-link]: https://gitter.im/coq-community/Lobby
 {{/ community }}
 
-{{# paper }}
+{{# doi }}
 [doi-shield]: https://zenodo.org/badge/DOI/{{ doi }}.svg
 [doi-link]: https://doi.org/{{ doi }}
-{{/ paper }}
+{{/ doi }}
 
 {{& description }}
-
-{{# paper }}
-More details about the project can be found in the paper
-[{{& title }}]({{ url }}).
-{{/ paper }}
 
 ## Meta
 
@@ -70,8 +65,11 @@ More details about the project can be found in the paper
 {{/ plugin }}
 - Additional Coq dependencies:{{# dependencies }}
   - {{& description }}{{/ dependencies }}{{^ dependencies }} none{{/ dependencies }}
+- Coq namespace: `{{ namespace }}`
+- Related publication(s):{{# publications }}
+  - [{{& pub_title }}]({{ pub_url }}) {{# pub_doi }}doi:[{{ pub_doi }}](https://doi.org/{{ pub_doi }}){{/ pub_doi}}{{/ publications }}{{^ publications }} none{{/ publications }}
 
-## Building and installation instructions
+{{& build }}{{^ build }}## Building and installation instructions
 
 The easiest way to install the latest released version of {{& fullname }}
 is via [OPAM](https://opam.ocaml.org/doc/Install.html):
@@ -89,9 +87,7 @@ cd {{ shortname }}
 make   # or make -j <number-of-cores-on-your-machine>
 make install
 ```
-
-After installation, the included modules are available under
-the `{{ namespace }}` namespace.
+{{/ build }}
 
 {{# extracted }}
 ## {{& extracted_fullname }}
