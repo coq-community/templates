@@ -4,7 +4,8 @@ version: "{{ opam-file-version }}{{^ opam-file-version }}dev{{/ opam-file-versio
 
 homepage: "https://github.com/{{ organization }}/{{ shortname }}"
 dev-repo: "git+https://github.com/{{ organization }}/{{ shortname }}.git"
-bug-reports: "https://github.com/{{ organization }}/{{ shortname }}/issues"
+bug-reports: "https://github.com/{{ organization }}/{{ shortname }}/issues"{{# coqdoc }}
+doc: "https://{{ organization }}.github.io/{{ shortname }}/"{{/ coqdoc }}
 {{# license }}license: "{{ identifier }}"{{/ license }}
 
 synopsis: "{{& synopsis }}"
