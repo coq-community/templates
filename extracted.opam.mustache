@@ -11,11 +11,11 @@ synopsis: "{{& extracted_synopsis }}"
 description: """
 {{& extracted_description }}"""
 
-build: [make "-j%{jobs}%" "{{& target }}"]
+build: [make "-j%{jobs}%" "{{& extracted_make_target }}"]
 depends: [
-{{# supported_ocaml_versions }}
+{{# extracted_supported_ocaml_versions }}
   "ocaml" {{& opam }}
-{{/ supported_ocaml_versions }}
+{{/ extracted_supported_ocaml_versions }}
 {{# supported_coq_versions }}
   "coq" {{& opam }}
 {{/ supported_coq_versions }}

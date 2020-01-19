@@ -68,10 +68,10 @@
 {{# supported_coq_versions }}
 - Compatible Coq versions: {{& text }}
 {{/ supported_coq_versions }}
-{{# plugin }}
-- Compatible OCaml versions: all versions supported by Coq
-{{/ plugin }}
-- Additional Coq dependencies:{{# dependencies }}
+{{# supported_ocaml_versions }}
+- Compatible OCaml versions: {{& text }}
+{{/ supported_ocaml_versions }}
+- Additional dependencies:{{# dependencies }}
   - {{& description }}{{/ dependencies }}{{^ dependencies }} none{{/ dependencies }}
 - Coq namespace: `{{ namespace }}`
 - Related publication(s):{{# publications }}
@@ -102,18 +102,18 @@ make install
 
 {{& extracted_description}}
 
-{{# supported_ocaml_versions }}
+{{# extracted_supported_ocaml_versions }}
 - Compatible OCaml versions: {{& text }}
-{{/ supported_ocaml_versions }}
-- Additional OCaml dependencies:{{# extracted_dependencies }}
+{{/ extracted_supported_ocaml_versions }}
+- Additional dependencies:{{# extracted_dependencies }}
   - {{& description }} {{/ extracted_dependencies }}{{^ extracted_dependencies }} none{{/ extracted_dependencies }}
 
-{{& extracted_fullname }} can be installed via OPAM as above using the package name `coq-{{ extracted_shortname }}`.
-
-To instead extract the code and compile manually, use the following command:
+{{& extracted_build }}{{^ extracted_build }}## Building
+To extract the code and compile manually, use the following command:
 ```
-make {{& target }}
+make {{& extracted_make_target }}
 ```
+{{/ extracted_build }}
 {{/ extracted }}
 
 {{& documentation }}

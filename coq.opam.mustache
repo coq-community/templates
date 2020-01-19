@@ -15,7 +15,9 @@ description: """
 build: [make "-j%{jobs}%"]
 install: [make "install"]
 depends: [
-  "ocaml"
+{{# supported_ocaml_versions }}
+  "ocaml" {{& opam }}
+{{/ supported_ocaml_versions }}
 {{# supported_coq_versions }}
   "coq" {{& opam }}
 {{/ supported_coq_versions }}

@@ -55,10 +55,12 @@ matrix:
 {{/ tested_coq_opam_versions }}
 
 {{# extracted }}
-  # Test extracted via OPAM
+  # Test extracted supported versions of Coq via OPAM
+{{# extracted_tested_coq_opam_versions }}
   - env:
-    - COQ_IMAGE=coqorg/coq:{{ tested_extracted_coq_opam_version }}
-    - PACKAGE=coq-{{ extracted_shortname }}
+    - COQ_IMAGE=coqorg/coq:{{ version }}
+    - PACKAGE={{ extracted_shortname }}.{{ opam-file-version }}{{^ opam-file-version }}dev{{/ opam-file-version }}
     - NJOBS=2
     <<: *OPAM
+{{/ extracted_tested_coq_opam_versions }}
 {{/ extracted }}
