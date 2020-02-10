@@ -19,7 +19,7 @@ and other boilerplate for coq-community (or external) Coq projects.
 Files ending in `.mustache` have values to fill in (and the `.mustache`
 extension should be removed from the resulting files). Filling in values can (and should)
 be done automatically using a mustache command-line tool. There are many mustache
-implementations available at the [Mustache website](https://mustache.github.io).
+implementations available from the [Mustache website](https://mustache.github.io).
 
 To enable generating files using a mustache tool, you should write a `meta.yml`
 file containing the required values. For example, assuming the templates
@@ -27,9 +27,9 @@ are available in a sibling directory, configuration and boilerplate
 files in the [AAC Tactics](https://github.com/coq-community/aac-tactics.git)
 project are generated as follows:
 ```shell
-mustache meta.yml ../templates/default.nix.mustache > default.nix && \
-mustache meta.yml ../templates/README.md.mustache > README.md && \
-mustache meta.yml ../templates/.travis.yml.mustache > .travis.yml && \
+mustache meta.yml ../templates/default.nix.mustache > default.nix
+mustache meta.yml ../templates/README.md.mustache > README.md
+mustache meta.yml ../templates/.travis.yml.mustache > .travis.yml
 mustache meta.yml ../templates/coq.opam.mustache > coq-aac-tactics.opam
 ```
 Other projects using the templates in a similar way include
