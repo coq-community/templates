@@ -1,0 +1,13 @@
+TEMPLATES ?= templates
+
+index.html: index.md
+	@echo "Generating $@..."
+	pandoc -s -o $@ $<
+
+%.opam: meta.yml $(TEMPLATES)/coq.opam.mustache
+	@echo "Generating $@..."
+	mustache $^ > $@
+
+%: meta.yml $(TEMPLATES)/%.mustache
+	@echo "Generating $@..."
+	mustache $^ > $@
