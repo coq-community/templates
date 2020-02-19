@@ -45,13 +45,14 @@ Other projects using the templates in a similar way include
 
 You can generate the standard files from the templates, provided
 you have already written `meta.yml`, in the following way:
-```shell
-cd <your_coq_project> && cd ..
-git clone https://github.com/coq-community/templates.git
-cd -
-../templates/generate.sh
-git add <the_generated_files>
-```
+
+1. Clone https://github.com/coq-community/templates.git as subdirectory or submodule.
+2. Include [`Makefile.meta`](Makefile.meta) in your `Makefile`.
+3. (Optional) Add rules for extracted OPAM file.
+4. Specify build targets.
+
+See [example](example) for more details.
+
 Keeping generated files under version control is not ideal, but `README.md` has to exist,
 and generally this is a common practice when using build systems such as Autotools.
 To get a `mustache` tool in, e.g., NixOS, you can run `nix-env -i mustache-go`.
