@@ -108,7 +108,7 @@ make install
 - Additional dependencies:{{# extracted_dependencies }}
   - {{& description }} {{/ extracted_dependencies }}{{^ extracted_dependencies }} none{{/ extracted_dependencies }}
 
-{{& extracted_build }}{{^ extracted_build }}## Building
+{{& extracted_build }}{{^ extracted_build }}### Building
 To extract the code and compile manually, use the following command:
 ```
 make {{& extracted_make_target }}
