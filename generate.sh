@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 for f in `dirname $0`/{,.}*.mustache
 do
