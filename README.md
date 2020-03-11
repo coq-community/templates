@@ -20,11 +20,18 @@ Files ending in `.mustache` have values to fill in (and the `.mustache`
 extension should be removed from the resulting files). Filling in values can (and should)
 be done automatically using a mustache command-line tool. There are many mustache
 implementations available from the [Mustache website](https://mustache.github.io).
+Note that these implementations can differ w.r.t. the supported input
+format (for your project metadata). We suggest you rely on a
+YAML-compatible mustache implementation such as `ruby-mustache`
+(available for instance as an
+[Ubuntu](https://packages.ubuntu.com/ruby-mustache) or
+[Debian](https://packages.debian.org/ruby-mustache) package).
 
-To enable generating files using a mustache tool, you should write a `meta.yml`
-file containing the required values. For example, assuming the templates
-are available in a sibling directory, configuration and boilerplate
-files in the [AAC Tactics](https://github.com/coq-community/aac-tactics.git)
+To enable generating files using one such mustache tool, you should
+thus write a `meta.yml` file containing the required values. For
+example, assuming the templates are available in a sibling directory,
+configuration and boilerplate files in the
+[AAC Tactics](https://github.com/coq-community/aac-tactics)
 project are generated as follows:
 ```shell
 mustache meta.yml ../templates/default.nix.mustache > default.nix
