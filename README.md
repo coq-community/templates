@@ -38,6 +38,8 @@ mustache meta.yml ../templates/default.nix.mustache > default.nix
 mustache meta.yml ../templates/README.md.mustache > README.md
 mustache meta.yml ../templates/.travis.yml.mustache > .travis.yml
 mustache meta.yml ../templates/coq.opam.mustache > coq-aac-tactics.opam
+mkdir -p .github/workflows
+mustache meta.yml ../templates/coq-action.yml.mustache > .github/workflows/coq-action.yml
 ```
 Other projects using the templates in a similar way include
 [Chapar](https://github.com/coq-community/chapar) and
