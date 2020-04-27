@@ -25,7 +25,7 @@ for f in "$srcdir"/{,.}*.mustache; do
             ;;
         coq-action.yml)
             if ask1 "Do you wish to generate the file .github/workflows/coq-action.yml?"; then
-                mkdir -p .github/workflows; target=".github/workflows/$target"
+                mkdir -p -v .github/workflows && target=".github/workflows/$target"
             else
                 continue
             fi
