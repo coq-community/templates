@@ -18,12 +18,13 @@ jobs:
 {{# tested_coq_opam_versions }}
           - {{ version }}
 {{/ tested_coq_opam_versions }}
-        ocaml_version: ['4.07-flambda']
+        ocaml_version: ['minimal']
     steps:
     - uses: actions/checkout@v2
     - uses: coq-community/docker-coq-action@v1
       with:
         opam_file: 'coq-{{ shortname }}.opam'
+{{! Change delimiters to avoid the next two lines being parsed as mustache syntax. }}
 {{=<% %>=}}
         coq_version: ${{ matrix.coq_version }}
         ocaml_version: ${{ matrix.ocaml_version }}
