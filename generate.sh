@@ -9,15 +9,26 @@ for f in "$srcdir"/{,.}*.mustache; do
     case "$target" in
         coq.opam)
             shortname=$(grep -e "^shortname:" meta.yml | sed -e 's/^shortname:\s\+//')
-            [ -n "$shortname" ] && target=${target/coq/coq-$shortname}
+            if [ -n "$shortname" ]; then
+                target=${target/coq/coq-$shortname}
+            else
+                continue
+            fi
             ;;
         extracted.opam)
             extracted_shortname=$(grep -e "^\s\+extracted_shortname:" meta.yml | sed -e 's/^\s\+extracted_shortname:\s\+//')
-            [ -n "$extracted_shortname" ] && target=${target/extracted/$extracted_shortname}
+            if [ -n "$extracted_shortname" ]; then
+                target=${target/extracted/$extracted_shortname}
+            else
+                continue
+            fi
             ;;
         coq-action.yml)
-            ask1 "Do you want to create a .github/workflows subfolder for coq-action.yml?" &&
-                { mkdir -p .github/workflows; target=".github/workflows/$target"; }
+            if ask1 "Do you wish to generate the file .github/workflows/coq-action.yml?"; then
+                mkdir -p .github/workflows; target=".github/workflows/$target"
+            else
+                continue
+            fi
             ;;
     esac
     echo "Generating $target..."
