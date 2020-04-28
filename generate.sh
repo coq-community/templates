@@ -2,13 +2,24 @@
 
 srcdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )
 
-function ask1() { local yn; echo -n "$* [Y/n] "; read -r -n 1 yn; [[ "$yn" =~ [Yy] ]] && echo && return 0; [ -z "$yn" ] && return 0; echo; return 1; }
+ask1() { local yn; echo -n "$* [Y/n] "; read -r -n 1 yn; [[ "$yn" =~ [Yy] ]] && echo && return 0; [ -z "$yn" ] && return 0; echo; return 1; }
+
+get_yaml() {
+    # Arg 1: the meta.yml path
+    # STDIN: the mustache code
+    local meta="$1" temp
+    temp=$(mktemp --tmpdir --suffix .yml template-XXX)
+    cat > "$temp"
+    mustache "$meta" "$temp"
+    rm -f "$temp"
+}
 
 for f in "$srcdir"/{,.}*.mustache; do
     target=$(basename "$f" .mustache)
     case "$target" in
         coq.opam)
-            shortname=$(grep -e "^shortname:" meta.yml | sed -e 's/^shortname:\s\+//')
+            mustache='{{ shortname }}'
+            shortname=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$shortname" ]; then
                 target=${target/coq/coq-$shortname}
             else
@@ -16,7 +27,8 @@ for f in "$srcdir"/{,.}*.mustache; do
             fi
             ;;
         extracted.opam)
-            extracted_shortname=$(grep -e "^\s\+extracted_shortname:" meta.yml | sed -e 's/^\s\+extracted_shortname:\s\+//')
+            mustache='{{# extracted }}{{ extracted_shortname }}{{/ extracted }}'
+            extracted_shortname=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$extracted_shortname" ]; then
                 target=${target/extracted/$extracted_shortname}
             else
