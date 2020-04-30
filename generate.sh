@@ -2,7 +2,8 @@
 
 srcdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )
 
-ask1() { local yn; echo -n "$* [Y/n] "; read -r -n 1 yn; [[ "$yn" =~ [Yy] ]] && echo && return 0; [ -z "$yn" ] && return 0; echo; return 1; }
+# ask1() { local yn; echo -n "$* [Y/n] "; read -r -n 1 yn; [[ "$yn" =~ [Yy] ]] && echo && return 0; [ -z "$yn" ] && return 0; echo; return 1; }
+# if ask1 "Question?"; then ...; else ...; fi
 
 get_yaml() {
     # Arg 1: the meta.yml path
@@ -11,7 +12,7 @@ get_yaml() {
     temp=$(mktemp --tmpdir --suffix .yml template-XXX)
     cat > "$temp"
     mustache "$meta" "$temp"
-    rm -f "$temp"
+    rm -f -- "$temp"
 }
 
 for f in "$srcdir"/{,.}*.mustache; do
@@ -36,8 +37,19 @@ for f in "$srcdir"/{,.}*.mustache; do
             fi
             ;;
         coq-action.yml)
-            if ask1 "Do you wish to generate the file .github/workflows/coq-action.yml?"; then
+            mustache='{{ action }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
                 mkdir -p -v .github/workflows && target=".github/workflows/$target"
+            else
+                continue
+            fi
+            ;;
+        .travis.yml | default.nix)
+            mustache='{{ travis }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                : noop
             else
                 continue
             fi
