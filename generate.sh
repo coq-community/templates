@@ -2,9 +2,6 @@
 
 srcdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )
 
-# ask1() { local yn; echo -n "$* [Y/n] "; read -r -n 1 yn; [[ "$yn" =~ [Yy] ]] && echo && return 0; [ -z "$yn" ] && return 0; echo; return 1; }
-# if ask1 "Question?"; then ...; else ...; fi
-
 get_yaml() {
     # Arg 1: the meta.yml path
     # STDIN: the mustache code
@@ -45,8 +42,17 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
-        .travis.yml | default.nix)
+        .travis.yml)
             mustache='{{ travis }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                : noop
+            else
+                continue
+            fi
+            ;;
+        default.nix)
+            mustache='{{ tested_coq_nix_versions }}'
             bool=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$bool" ] && [ "$bool" != false ]; then
                 : noop
