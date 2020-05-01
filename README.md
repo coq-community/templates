@@ -34,10 +34,10 @@ configuration and boilerplate files in the
 [AAC Tactics](https://github.com/coq-community/aac-tactics)
 project are generated as follows:
 ```shell
-mustache meta.yml ../templates/default.nix.mustache > default.nix
 mustache meta.yml ../templates/README.md.mustache > README.md
-mustache meta.yml ../templates/.travis.yml.mustache > .travis.yml
 mustache meta.yml ../templates/coq.opam.mustache > coq-aac-tactics.opam
+mustache meta.yml ../templates/default.nix.mustache > default.nix
+mustache meta.yml ../templates/.travis.yml.mustache > .travis.yml
 ```
 Other projects using the templates in a similar way include
 [Chapar](https://github.com/coq-community/chapar) and
@@ -52,6 +52,14 @@ cd -
 ../templates/generate.sh
 git add <the_generated_files>
 ```
+Regarding continuous integration, the `generate.sh` script will create:
+* a [Travis CI](https://docs.travis-ci.com/) configuration
+    [(based on opam + Nix)](./.travis.yml.mustache),
+* or a [GitHub Action](https://help.github.com/en/actions) workflow
+    [(based on opam)](./coq-action.yml.mustache),
+
+depending on whether `meta.yml` contains `travis: true` or `action: true`.
+
 Keeping generated files under version control is not ideal, but `README.md` has to exist,
 and generally this is a common practice when using build systems such as Autotools.
 To get a `mustache` tool in, e.g., NixOS, you can run `nix-env -i mustache-go`.

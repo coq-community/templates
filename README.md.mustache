@@ -3,6 +3,9 @@
 {{# travis }}
 [![Travis][travis-shield]][travis-link]
 {{/ travis }}
+{{# action }}
+[![CI][action-shield]][action-link]
+{{/ action }}
 {{# circleci }}
 [![CircleCI][circleci-shield]][circleci-link]
 {{/ circleci }}
@@ -22,6 +25,10 @@
 [travis-shield]: https://travis-ci.com/{{ organization }}/{{ shortname }}.svg?branch=master
 [travis-link]: https://travis-ci.com/{{ organization }}/{{ shortname }}/builds
 {{/ travis }}
+{{# action }}
+[action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/CI/badge.svg?branch=master
+[action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow%3ACI
+{{/ action }}
 {{# circleci }}
 [circleci-shield]: https://circleci.com/gh/{{ organization }}/{{ shortname }}.svg?style=svg
 [circleci-link]:   https://circleci.com/gh/{{ organization }}/{{ shortname }}
