@@ -79,7 +79,7 @@
 - Compatible OCaml versions: {{& text }}
 {{/ supported_ocaml_versions }}
 - Additional dependencies:{{# dependencies }}
-  - {{& description }}{{/ dependencies }}{{^ dependencies }} none{{/ dependencies }}
+  - {{& text_description }}{{^ text_description }}{{# opam }}{{ name }}{{/ opam }}{{/ text_description}}{{/ dependencies }}{{^ dependencies }} none{{/ dependencies }}
 - Coq namespace: `{{ namespace }}`
 - Related publication(s):{{# publications }}
   - [{{& pub_title }}]({{ pub_url }}) {{# pub_doi }}doi:[{{ pub_doi }}](https://doi.org/{{ pub_doi }}){{/ pub_doi}}{{/ publications }}{{^ publications }} none{{/ publications }}
