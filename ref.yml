@@ -53,7 +53,7 @@ keys:
     used:
     - coq.opam
 - description:
-    requied: true
+    required: true
     used:
     - README.md
     - index.md
@@ -89,6 +89,7 @@ keys:
         required: true
     - file:
         required: false
+        default: LICENSE
     used:
     - README.md
     - index.md
@@ -116,6 +117,7 @@ keys:
     - README.md
     - coq.opam
 - plugin:
+    type: bool
     used:
     - default.nix
 - dependencies:
@@ -129,6 +131,7 @@ keys:
             required: true
         - version
     - nix
+        required: true
     used:
     - README.md
     - coq.opam
@@ -204,10 +207,12 @@ keys:
     - extracted.opam
     - .travis.yml
 - documentation:
+    required: false
     used:
     - README.md
 - opam-file-maintainer:
     required: false
+    default: palmskog@gmail.com
     used:
     - coq.opam
     - extracted.opam
