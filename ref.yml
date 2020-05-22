@@ -60,93 +60,112 @@ keys:
     - coq.opam
 - authors:
     required: true
-    fields:
+    item_fields:
     - name:
         required: true
+        used:
+        - README.md
+        - index.md
+        - coq.opam
+        - extracted.opam
     - initial:
         type: bool
+        used:
+        - README.md
+        - index.md
     - email:
         required: false
-    used:
-    - README.md
-    - index.md
-    - coq.opam
-    - extracted.opam
+        used:
+        - coq.opam
+        - extracted.opam
 - maintainers:
-    fields:
+    item_fields:
     - name:
         required: true
     - nickname:
         required: true
     used:
     - README.md
+    caveats:
+    - Required if `community` is true.
 - license:
     required: false
-    keys:
+    fields:
     - fullname:
         required: true
+        used:
+        - README.md
+        - index.md
     - identifier:
         required: true
+        used:
+        - coq.opam
+        - extracted.opam
     - file:
         required: false
         default: LICENSE
-    used:
-    - README.md
-    - index.md
-    - coq.opam
-    - extracted.opam
+        used:
+        - README.md
+        - index.md
 - supported_coq_versions:
     required: false
-    keys:
+    fields:
     - text:
         required: true
+        used:
+        - README.md
     - opam:
         required: true
-    used:
-    - README.md
-    - coq.opam
-    - extracted.opam
+        used:
+        - coq.opam
+        - extracted.opam
 - supported_ocaml_versions:
     required: false
-    keys:
+    fields:
     - text:
         required: true
+        used:
+        - README.md
     - opam:
         required: true
-    used:
-    - README.md
-    - coq.opam
+        used:
+        - coq.opam
 - plugin:
     type: bool
     used:
     - default.nix
 - dependencies:
-    fields:
+    item_fields:
     - description:
         required: true
+        used:
+        - README.md
     - opam:
         required: false
-        keys:
+        fields:
         - name:
             required: true
         - version
+        used:
+        - coq.opam
+        - extracted.opam
     - nix:
         required: true
-    used:
-    - README.md
-    - coq.opam
-    - extracted.opam
-    - default.nix
+        used:
+        - README.md
+        - coq.opam
+        - extracted.opam
+        - default.nix
 - categories:
     required: false
-    keys:
+    fields:
     - name:
         required: true
     used:
     - coq.opam
 - keywords:
     required: false
-    keys:
+    fields:
     - name:
         required: true
     used:
@@ -161,7 +180,7 @@ keys:
     - README.md
     - coq.opam
 - publications:
-    fields:
+    item_fields:
     - pub_title:
         required: true
     - pub_url:
@@ -177,35 +196,59 @@ keys:
     - README.md
 - extracted:
     required: false
-    keys:
+    fields:
     - extracted_fullname:
         required: true
+        used:
+        - README.md
     - extracted_shortname:
         required: true
+        used:
+        - README.md
+        - .travis.yml
     - extracted_synopsis:
         required: true
+        used:
+        - README.md
+        - extracted.opam
     - extracted_description:
         required: true
+        used:
+        - README.md
+        - extracted.opam
     - extracted_supported_ocaml_versions:
         required: false
-        keys:
+        fields:
         - text:
             required: true
+            used:
+            - README.md
         - opam:
             required: true
+            used:
+            - extracted.opam
     - extracted_dependencies:
         required: false
-        fields:
+        item_fields:
         - description:
             requied: true
+        used:
+        - README.md
+        - extracted.opam
     - extracted_build:
         required: false
+        used:
+        - README.md
     - extracted_make_target:
         required: true
-    used:
-    - README.md
-    - extracted.opam
-    - .travis.yml
+        used:
+        - extracted.opam
+    - extracted_tested_coq_opam_versions:
+        item_fields:
+        - version:
+            required: true
+        used:
+        - .travis.yml
 - documentation:
     required: false
     used:
@@ -222,13 +265,13 @@ keys:
     - coq.opam
     - .travis.yml
 - tested_coq_nix_versions:
-    fields:
+    item_fields:
     - version_or_url:
         required: true
     used:
     - .travis.yml
 - tested_coq_opam_versions:
-    fields:
+    item_fields:
     - version:
         required: true
     used:
