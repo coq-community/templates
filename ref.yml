@@ -1,0 +1,232 @@
+keys:
+- fullname:
+    required: true
+    used:
+    - README.md
+    - index.md
+- shortname:
+    required: true
+    used:
+    - README.md
+    - index.md
+    - coq.opam
+    - extracted.opam
+    - .travis.yml
+    - coq-action.yml
+    - config.yml
+    - default.nix
+- organization:
+    required: true
+    used:
+    - README.md
+    - index.md
+    - coq.opam
+    - extracted.opam
+- travis:
+    type: bool
+    used:
+    - README.md
+- action:
+    type: bool
+    used:
+    - README.md
+- circleci:
+    type: bool
+    used:
+    - README.md
+- community:
+    type: bool
+    used:
+    - README.md
+    - index.md
+- coqdoc:
+    type: bool
+    used:
+    - README.md
+    - coq.opam
+- doi:
+    required: false
+    used:
+    - README.md
+- synopsis:
+    required: true
+    used:
+    - coq.opam
+- description:
+    requied: true
+    used:
+    - README.md
+    - index.md
+    - coq.opam
+- authors:
+    required: true
+    fields:
+    - name:
+        required: true
+    - initial:
+        type: bool
+    - email:
+        required: false
+    used:
+    - README.md
+    - index.md
+    - coq.opam
+    - extracted.opam
+- maintainers:
+    fields:
+    - name:
+        required: true
+    - nickname:
+        required: true
+    used:
+    - README.md
+- license:
+    required: false
+    keys:
+    - fullname:
+        required: true
+    - identifier:
+        required: true
+    - file:
+        required: false
+    used:
+    - README.md
+    - index.md
+    - coq.opam
+    - extracted.opam
+- supported_coq_versions:
+    required: false
+    keys:
+    - text:
+        required: true
+    - coq.opam:
+        required: true
+    used:
+    - README.md
+    - coq.opam
+    - extracted.opam
+- supported_ocaml_versions:
+    required: false
+    keys:
+    - text:
+        required: true
+    - coq.opam:
+        required: true
+    used:
+    - README.md
+    - coq.opam
+- plugin:
+    used:
+    - default.nix
+- dependencies:
+    fields:
+    - description:
+        required: true
+    - opam:
+        required: false
+        keys:
+        - name:
+            required: true
+        - version
+    - nix
+    used:
+    - README.md
+    - coq.opam
+    - extracted.opam
+    - default.nix
+- categories:
+    required: false
+    keys:
+    - name:
+        required: true
+    used:
+    - coq.opam
+- keywords:
+    required: false
+    keys:
+    - name:
+        required: true
+    used:
+    - coq.opam
+- date:
+    required: false
+    used:
+    - coq.opam
+- namespace:
+    required: true
+    used:
+    - README.md
+    - coq.opam
+- publications:
+    fields:
+    - pub_title:
+        required: true
+    - pub_url:
+        required: true
+    - pub_doi:
+        required: false
+    used:
+    - README.md
+    - index.md
+- build:
+    required: false
+    used:
+    - README.md
+- extracted:
+    required: false
+    keys:
+    - extracted_fullname:
+        required: true
+    - extracted_shortname:
+        required: true
+    - extracted_synopsis:
+        required: true
+    - extracted_description:
+        required: true
+    - extracted_supported_ocaml_versions:
+        required: false
+        keys:
+        - text:
+            required: true
+        - opam:
+            required: true
+    - extracted_dependencies:
+        required: false
+        fields:
+        - description:
+            requied: true
+    - extracted_build:
+        required: false
+    - extracted_make_target:
+        required: true
+    used:
+    - README.md
+    - extracted.opam
+    - .travis.yml
+- documentation:
+    used:
+    - README.md
+- opam-file-maintainer:
+    required: false
+    used:
+    - coq.opam
+    - extracted.opam
+- opam-file-version:
+    required: false
+    used:
+    - coq.opam
+    - .travis.yml
+- tested_coq_nix_versions:
+    fields:
+    - version_or_url:
+        required: true
+    used:
+    - .travis.yml
+- tested_coq_opam_versions:
+    fields:
+    - version:
+        required: true
+    used:
+    - .travis.yml
+    - coq-action.yml
+    - config.yml
