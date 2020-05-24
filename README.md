@@ -43,6 +43,8 @@ Other projects using the templates in a similar way include
 [Chapar](https://github.com/coq-community/chapar) and
 [Lemma Overloading](https://github.com/coq-community/lemma-overloading).
 
+All the keys used by templates files are specified in [`ref.yml`](ref.yml).
+
 You can generate the standard files from the templates, provided
 you have already written `meta.yml`, in the following way:
 ```shell
