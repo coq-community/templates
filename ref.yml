@@ -1,280 +1,281 @@
+---
 keys:
-- fullname:
-    required: true
-    used:
-    - README.md
-    - index.md
-- shortname:
-    required: true
-    used:
-    - README.md
-    - index.md
-    - coq.opam
-    - extracted.opam
-    - .travis.yml
-    - coq-action.yml
-    - config.yml
-    - default.nix
-- organization:
-    required: true
-    used:
-    - README.md
-    - index.md
-    - coq.opam
-    - extracted.opam
-- travis:
-    type: bool
-    used:
-    - README.md
-- action:
-    type: bool
-    used:
-    - README.md
-- circleci:
-    type: bool
-    used:
-    - README.md
-- community:
-    type: bool
-    used:
-    - README.md
-    - index.md
-- coqdoc:
-    type: bool
-    used:
-    - README.md
-    - coq.opam
-- doi:
-    required: false
-    used:
-    - README.md
-- synopsis:
-    required: true
-    used:
-    - coq.opam
-- description:
-    required: true
-    used:
-    - README.md
-    - index.md
-    - coq.opam
-- authors:
-    required: true
-    item_fields:
-    - name:
-        required: true
-        used:
+  - fullname:
+      required: true
+      used:
+        - README.md
+        - index.md
+  - shortname:
+      required: true
+      used:
         - README.md
         - index.md
         - coq.opam
         - extracted.opam
-    - initial:
-        type: bool
-        used:
+        - .travis.yml
+        - coq-action.yml
+        - config.yml
+        - default.nix
+  - organization:
+      required: true
+      used:
         - README.md
         - index.md
-    - email:
-        required: false
-        used:
         - coq.opam
         - extracted.opam
-- maintainers:
-    item_fields:
-    - name:
-        required: true
-    - nickname:
-        required: true
-    used:
-    - README.md
-    caveats:
-    - Required if `community` is true.
-- license:
-    required: false
-    fields:
-    - fullname:
-        required: true
-        used:
+  - travis:
+      type: bool
+      used:
+        - README.md
+  - action:
+      type: bool
+      used:
+        - README.md
+  - circleci:
+      type: bool
+      used:
+        - README.md
+  - community:
+      type: bool
+      used:
         - README.md
         - index.md
-    - identifier:
-        required: true
-        used:
+  - coqdoc:
+      type: bool
+      used:
+        - README.md
         - coq.opam
-        - extracted.opam
-    - file:
-        required: false
-        default: LICENSE
-        used:
+  - doi:
+      required: false
+      used:
+        - README.md
+  - synopsis:
+      required: true
+      used:
+        - coq.opam
+  - description:
+      required: true
+      used:
         - README.md
         - index.md
-- supported_coq_versions:
-    required: false
-    fields:
-    - text:
-        required: true
-        used:
-        - README.md
-    - opam:
-        required: true
-        used:
         - coq.opam
-        - extracted.opam
-- supported_ocaml_versions:
-    required: false
-    fields:
-    - text:
-        required: true
-        used:
-        - README.md
-    - opam:
-        required: true
-        used:
-        - coq.opam
-- plugin:
-    type: bool
-    used:
-    - default.nix
-- dependencies:
-    item_fields:
-    - description:
-        required: true
-        used:
-        - README.md
-    - opam:
-        required: false
-        fields:
+  - authors:
+      required: true
+      item_fields:
         - name:
             required: true
-        - version
-        used:
-        - coq.opam
-        - extracted.opam
-    - nix:
-        required: true
-        used:
+            used:
+              - README.md
+              - index.md
+              - coq.opam
+              - extracted.opam
+        - initial:
+            type: bool
+            used:
+              - README.md
+              - index.md
+        - email:
+            required: false
+            used:
+              - coq.opam
+              - extracted.opam
+  - maintainers:
+      item_fields:
+        - name:
+            required: true
+        - nickname:
+            required: true
+      used:
         - README.md
-        - coq.opam
-        - extracted.opam
-        - default.nix
-- categories:
-    required: false
-    fields:
-    - name:
-        required: true
-    used:
-    - coq.opam
-- keywords:
-    required: false
-    fields:
-    - name:
-        required: true
-    used:
-    - coq.opam
-- date:
-    required: false
-    used:
-    - coq.opam
-- namespace:
-    required: true
-    used:
-    - README.md
-    - coq.opam
-- publications:
-    item_fields:
-    - pub_title:
-        required: true
-    - pub_url:
-        required: true
-    - pub_doi:
-        required: false
-    used:
-    - README.md
-    - index.md
-- build:
-    required: false
-    used:
-    - README.md
-- extracted:
-    required: false
-    fields:
-    - extracted_fullname:
-        required: true
-        used:
-        - README.md
-    - extracted_shortname:
-        required: true
-        used:
-        - README.md
-        - .travis.yml
-    - extracted_synopsis:
-        required: true
-        used:
-        - README.md
-        - extracted.opam
-    - extracted_description:
-        required: true
-        used:
-        - README.md
-        - extracted.opam
-    - extracted_supported_ocaml_versions:
-        required: false
-        fields:
+      caveats:
+        - Required if `community` is true.
+  - license:
+      required: false
+      fields:
+        - fullname:
+            required: true
+            used:
+              - README.md
+              - index.md
+        - identifier:
+            required: true
+            used:
+              - coq.opam
+              - extracted.opam
+        - file:
+            required: false
+            default: LICENSE
+            used:
+              - README.md
+              - index.md
+  - supported_coq_versions:
+      required: false
+      fields:
         - text:
             required: true
             used:
-            - README.md
+              - README.md
         - opam:
             required: true
             used:
-            - extracted.opam
-    - extracted_dependencies:
-        required: false
-        item_fields:
+              - coq.opam
+              - extracted.opam
+  - supported_ocaml_versions:
+      required: false
+      fields:
+        - text:
+            required: true
+            used:
+              - README.md
+        - opam:
+            required: true
+            used:
+              - coq.opam
+  - plugin:
+      type: bool
+      used:
+        - default.nix
+  - dependencies:
+      item_fields:
         - description:
-            requied: true
-        used:
+            required: true
+            used:
+              - README.md
+        - opam:
+            required: false
+            fields:
+              - name:
+                  required: true
+              - version
+            used:
+              - coq.opam
+              - extracted.opam
+        - nix:
+            required: true
+            used:
+              - README.md
+              - coq.opam
+              - extracted.opam
+              - default.nix
+  - categories:
+      required: false
+      fields:
+        - name:
+            required: true
+      used:
+        - coq.opam
+  - keywords:
+      required: false
+      fields:
+        - name:
+            required: true
+      used:
+        - coq.opam
+  - date:
+      required: false
+      used:
+        - coq.opam
+  - namespace:
+      required: true
+      used:
         - README.md
-        - extracted.opam
-    - extracted_build:
-        required: false
-        used:
+        - coq.opam
+  - publications:
+      item_fields:
+        - pub_title:
+            required: true
+        - pub_url:
+            required: true
+        - pub_doi:
+            required: false
+      used:
         - README.md
-    - extracted_make_target:
-        required: true
-        used:
+        - index.md
+  - build:
+      required: false
+      used:
+        - README.md
+  - extracted:
+      required: false
+      fields:
+        - extracted_fullname:
+            required: true
+            used:
+              - README.md
+        - extracted_shortname:
+            required: true
+            used:
+              - README.md
+              - .travis.yml
+        - extracted_synopsis:
+            required: true
+            used:
+              - README.md
+              - extracted.opam
+        - extracted_description:
+            required: true
+            used:
+              - README.md
+              - extracted.opam
+        - extracted_supported_ocaml_versions:
+            required: false
+            fields:
+              - text:
+                  required: true
+                  used:
+                    - README.md
+              - opam:
+                  required: true
+                  used:
+                    - extracted.opam
+        - extracted_dependencies:
+            required: false
+            item_fields:
+              - description:
+                  requied: true
+            used:
+              - README.md
+              - extracted.opam
+        - extracted_build:
+            required: false
+            used:
+              - README.md
+        - extracted_make_target:
+            required: true
+            used:
+              - extracted.opam
+        - extracted_tested_coq_opam_versions:
+            item_fields:
+              - version:
+                  required: true
+            used:
+              - .travis.yml
+  - documentation:
+      required: false
+      used:
+        - README.md
+  - opam-file-maintainer:
+      required: false
+      default: palmskog@gmail.com
+      used:
+        - coq.opam
         - extracted.opam
-    - extracted_tested_coq_opam_versions:
-        item_fields:
+  - opam-file-version:
+      required: false
+      used:
+        - coq.opam
+        - .travis.yml
+  - tested_coq_nix_versions:
+      item_fields:
+        - version_or_url:
+            required: true
+      used:
+        - .travis.yml
+  - tested_coq_opam_versions:
+      item_fields:
         - version:
             required: true
-        used:
+      used:
         - .travis.yml
-- documentation:
-    required: false
-    used:
-    - README.md
-- opam-file-maintainer:
-    required: false
-    default: palmskog@gmail.com
-    used:
-    - coq.opam
-    - extracted.opam
-- opam-file-version:
-    required: false
-    used:
-    - coq.opam
-    - .travis.yml
-- tested_coq_nix_versions:
-    item_fields:
-    - version_or_url:
-        required: true
-    used:
-    - .travis.yml
-- tested_coq_opam_versions:
-    item_fields:
-    - version:
-        required: true
-    used:
-    - .travis.yml
-    - coq-action.yml
-    - config.yml
+        - coq-action.yml
+        - config.yml
