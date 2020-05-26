@@ -52,7 +52,7 @@ jobs:
 {{# tested_coq_opam_versions }}
   - env:
     - COQ_IMAGE=coqorg/coq:{{ version }}
-    - PACKAGE=coq-{{ shortname }}.{{ opam-file-version }}{{^ opam-file-version }}dev{{/ opam-file-version }}
+    - PACKAGE={{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.{{ opam-file-version }}{{^ opam-file-version }}dev{{/ opam-file-version }}
     - NJOBS=2
     <<: *OPAM
 {{/ tested_coq_opam_versions }}

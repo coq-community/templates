@@ -16,12 +16,18 @@ for f in "$srcdir"/{,.}*.mustache; do
     target=$(basename "$f" .mustache)
     case "$target" in
         coq.opam)
-            mustache='{{ shortname }}'
-            shortname=$(get_yaml meta.yml <<<"$mustache")
-            if [ -n "$shortname" ]; then
-                target=${target/coq/coq-$shortname}
-            else
-                continue
+            mustache='{{ opam_name }}'
+            opam_name=$(get_yaml meta.yml <<<"$mustache")
+	    if [ -n "$opam_name" ]; then
+		target=${target/coq/$opam_name}
+	    else
+		mustache='{{ shortname }}'
+		shortname=$(get_yaml meta.yml <<<"$mustache")
+		if [ -n "$shortname" ]; then
+		    target=${target/coq/coq-$shortname}
+	        else
+		    continue
+		fi
             fi
             ;;
         extracted.opam)
