@@ -24,7 +24,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: coq-community/docker-coq-action@v1
       with:
-        opam_file: 'coq-{{ shortname }}.opam'
+        opam_file: '{{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.opam'
 {{! Change delimiters to avoid the next two lines being parsed as mustache syntax. }}
 {{=<% %>=}}
         coq_version: ${{ matrix.coq_version }}

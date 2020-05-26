@@ -91,7 +91,7 @@ is via [OPAM](https://opam.ocaml.org/doc/Install.html):
 
 ```shell
 opam repo add coq-released https://coq.inria.fr/opam/released
-opam install coq-{{ shortname }}
+opam install {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}
 ```
 
 To instead build and install manually, do:

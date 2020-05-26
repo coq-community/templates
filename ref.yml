@@ -12,10 +12,15 @@ keys:
         - index.md
         - coq.opam
         - extracted.opam
-        - .travis.yml
-        - coq-action.yml
         - config.yml
         - default.nix
+  - opam_name:
+      required: false
+      default: coq-{{ shortname }}
+      used:
+        - README.md
+        - .travis.yml
+        - coq-action.yml
   - organization:
       required: true
       used:
