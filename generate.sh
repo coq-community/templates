@@ -57,6 +57,15 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
+	config.yml)
+	    mustache='{{ circleci }}'
+	    bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                mkdir -p -v .circleci && target=".circleci/$target"
+            else
+                continue
+            fi
+            ;;
         default.nix)
             mustache='{{ tested_coq_nix_versions }}'
             bool=$(get_yaml meta.yml <<<"$mustache")

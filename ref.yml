@@ -40,6 +40,10 @@ keys:
       type: bool
       used:
         - README.md
+  - ci_test_dependants:
+      type: bool
+      used:
+        - config.yml
   - community:
       type: bool
       used:

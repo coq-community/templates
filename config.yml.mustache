@@ -24,7 +24,7 @@ jobs:
     - run:
         name: Install dependencies
         command: |
-          opam repo -a add coq-extra-dev https://coq.inria.fr/opam/extra-dev
+          opam repo -a --set-default add coq-extra-dev https://coq.inria.fr/opam/extra-dev
           opam update
           opam install --deps-only .
     - run:
@@ -33,6 +33,7 @@ jobs:
     - run:
         name: Build, test, and install package
         command: opam install -t .
+{{# ci_test_dependants }}
     - run:
         name: Test dependants
         command: |
@@ -41,6 +42,7 @@ jobs:
           if ! [ -z "$PACKAGES" ]
           then opam install -t $PACKAGES
           fi
+{{/ ci_test_dependants }}
     - run:
         name: Uninstall package
         command: opam uninstall .
