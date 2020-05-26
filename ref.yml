@@ -116,7 +116,13 @@ keys:
             used:
               - README.md
         - opam:
-            required: true
+            required: false
+            description: >
+              Version formula including curly brackets:
+              https://opam.ocaml.org/doc/Manual.html#Common-file-format
+              Quote the string, otherwise confuse the parser.
+            examples:
+              - '{ >= "8.10" }'
             used:
               - coq.opam
               - extracted.opam
@@ -252,6 +258,9 @@ keys:
                     Docker tag supported by coqorg/coq:
                     https://github.com/coq-community/docker-coq/wiki#supported-tags
                     Quote the strings, otherwise '8.10' becomes '8.1'.
+                  examples:
+                    - '8.11'
+                    - 'dev'
             used:
               - .travis.yml
   - documentation:
@@ -283,6 +292,9 @@ keys:
               Docker tag supported by coqorg/coq:
               https://github.com/coq-community/docker-coq/wiki#supported-tags
               Quote the strings, otherwise '8.10' becomes '8.1'.
+            examples:
+              - '8.11'
+              - 'dev'
       used:
         - .travis.yml
         - coq-action.yml

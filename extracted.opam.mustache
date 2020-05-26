@@ -16,9 +16,7 @@ depends: [
 {{# extracted_supported_ocaml_versions }}
   "ocaml" {{& opam }}
 {{/ extracted_supported_ocaml_versions }}
-{{# supported_coq_versions }}
-  "coq" {{& opam }}
-{{/ supported_coq_versions }}
+  "coq" {{& supported_coq_versions.opam }}
 {{# dependencies }}
 {{# opam }}
   "{{ name }}" {{& version }}
