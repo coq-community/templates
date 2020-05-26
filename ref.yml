@@ -248,6 +248,10 @@ keys:
             item_fields:
               - version:
                   required: true
+                  description: >
+                    Docker tag supported by coqorg/coq:
+                    https://github.com/coq-community/docker-coq/wiki#supported-tags
+                    Quote the strings, otherwise '8.10' becomes '8.1'.
             used:
               - .travis.yml
   - documentation:
@@ -275,6 +279,10 @@ keys:
       item_fields:
         - version:
             required: true
+            description: >
+              Docker tag supported by coqorg/coq:
+              https://github.com/coq-community/docker-coq/wiki#supported-tags
+              Quote the strings, otherwise '8.10' becomes '8.1'.
       used:
         - .travis.yml
         - coq-action.yml

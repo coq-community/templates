@@ -16,7 +16,7 @@ jobs:
       matrix:
         coq_version:
 {{# tested_coq_opam_versions }}
-          - {{ version }}
+          - '{{ version }}'
 {{/ tested_coq_opam_versions }}
         ocaml_version: ['minimal']
       fail-fast: false
