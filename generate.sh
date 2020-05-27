@@ -67,6 +67,15 @@ for f in "$srcdir"/{,.}*.mustache; do
             fi
             ;;
     esac
+    listed=false
+    for specified_target in "$@"; do
+        if [ "$specified_target" == "$target" ]; then
+            listed=true
+	fi
+    done
+    if [ $# -gt 0 ] && [ $listed != true ]; then
+	continue
+    fi
     echo "Generating $target..."
     mustache meta.yml "$f" > "$target"
 done

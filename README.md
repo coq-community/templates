@@ -62,6 +62,11 @@ Regarding continuous integration, the `generate.sh` script will create:
 
 depending on whether `meta.yml` contains `travis: true` or `action: true`.
 
+If you only want to generate certain files, please specify them as shell script arguments:
+```shell
+../templates/generate.sh README.md coq-aac-tactics.opam
+```
+
 Keeping generated files under version control is not ideal, but `README.md` has to exist,
 and generally this is a common practice when using build systems such as Autotools.
 To get a `mustache` tool in, e.g., NixOS, you can run `nix-env -i mustache-go`.
