@@ -1,7 +1,9 @@
 ---
-keys:
+fields:
   - fullname:
       required: true
+      description: >
+        Possibly space separated and capitalized name.
       used:
         - README.md
         - index.md
@@ -34,6 +36,8 @@ keys:
         - README.md
   - action:
       type: bool
+      description: >
+        Set to true to use the GitHub Action template.
       used:
         - README.md
   - circleci:
@@ -42,6 +46,8 @@ keys:
         - README.md
   - community:
       type: bool
+      description: >
+        Set to true if the project is part of coq-community.
       used:
         - README.md
         - index.md
@@ -66,6 +72,7 @@ keys:
         - coq.opam
   - authors:
       required: true
+      type: list
       item_fields:
         - name:
             required: true
@@ -76,6 +83,9 @@ keys:
               - extracted.opam
         - initial:
             type: bool
+            description: >
+              Initial authors are highlighted as such in the README.
+              This is especially relevant for coq-community projects.
             used:
               - README.md
               - index.md
@@ -85,6 +95,7 @@ keys:
               - coq.opam
               - extracted.opam
   - maintainers:
+      type: list
       item_fields:
         - name:
             required: true
@@ -104,6 +115,9 @@ keys:
               - index.md
         - identifier:
             required: true
+            description: >
+              Should be an SPDX identifier.
+              List available at: https://spdx.org/licenses/
             used:
               - coq.opam
               - extracted.opam
@@ -121,7 +135,13 @@ keys:
             used:
               - README.md
         - opam:
-            required: true
+            required: false
+            description: >
+              Version formula including curly brackets:
+              https://opam.ocaml.org/doc/Manual.html#Common-file-format
+              Quote the string, otherwise confuse the parser.
+            examples:
+              - '{ >= "8.10" }'
             used:
               - coq.opam
               - extracted.opam
@@ -141,6 +161,7 @@ keys:
       used:
         - default.nix
   - dependencies:
+      type: list
       item_fields:
         - description:
             required: true
@@ -157,10 +178,13 @@ keys:
               - extracted.opam
         - nix:
             required: true
+            description: >
+              The list of Coq packages in nixpkgs can be seen here:
+              https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/top-level/coq-packages.nix
+              Casing matters and might differ from the opam name.  The
+              leading coq- is present only if it is really an integral
+              part of the package name.
             used:
-              - README.md
-              - coq.opam
-              - extracted.opam
               - default.nix
   - categories:
       required: false
@@ -178,6 +202,9 @@ keys:
         - coq.opam
   - date:
       required: false
+      description: >
+        This can be used to regenerate an opam file with a release
+        date, for inclusion in the opam-coq-archive.
       used:
         - coq.opam
   - namespace:
@@ -186,6 +213,7 @@ keys:
         - README.md
         - coq.opam
   - publications:
+      type: list
       item_fields:
         - pub_title:
             required: true
@@ -198,6 +226,9 @@ keys:
         - index.md
   - build:
       required: false
+      description: >
+        The installation and build instructions, if the default ones
+        do not suit your project.
       used:
         - README.md
   - extracted:
@@ -235,6 +266,7 @@ keys:
                     - extracted.opam
         - extracted_dependencies:
             required: false
+            type: list
             item_fields:
               - description:
                   requied: true
@@ -250,13 +282,23 @@ keys:
             used:
               - extracted.opam
         - extracted_tested_coq_opam_versions:
+            type: list
             item_fields:
               - version:
                   required: true
+                  description: >
+                    Docker tag supported by coqorg/coq:
+                    https://github.com/coq-community/docker-coq/wiki#supported-tags
+                    Quote the strings, otherwise '8.10' becomes '8.1'.
+                  examples:
+                    - '8.11'
+                    - 'dev'
             used:
               - .travis.yml
   - documentation:
       required: false
+      description: >
+        The part of the README that is not auto-generated.
       used:
         - README.md
   - opam-file-maintainer:
@@ -271,15 +313,38 @@ keys:
         - coq.opam
         - .travis.yml
   - tested_coq_nix_versions:
+      type: list
       item_fields:
         - version_or_url:
             required: true
+            description: >
+              This can be a version number of a version packaged in
+              nixpkgs (example: 8.5, 8.11).  Cf. the coqPackages_8_XX
+              attributes defined at the end of this file:
+              https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/top-level/coq-packages.nix
+              (Quote the version number, otherwise '8.10' becomes '8.1'.)
+
+              Or this can be a URL, to test your project with a
+              version of Coq under development.  Typically this is
+              https://github.com/coq/coq-on-cachix/tarball/master but
+              'master' may be replaced by any valid reference like one
+              of the branches available at
+              https://github.com/coq/coq-on-cachix/branches or a valid
+              commit hash.
       used:
         - .travis.yml
   - tested_coq_opam_versions:
+      type: list
       item_fields:
         - version:
             required: true
+            description: >
+              Docker tag supported by coqorg/coq:
+              https://github.com/coq-community/docker-coq/wiki#supported-tags
+              Quote the strings, otherwise '8.10' becomes '8.1'.
+            examples:
+              - '8.11'
+              - 'dev'
       used:
         - .travis.yml
         - coq-action.yml
