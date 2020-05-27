@@ -38,7 +38,7 @@ jobs:
         name: Test dependants
         command: |
           PINS=$(echo `opam list -s --pinned --columns=package` | sed 's/ /,/g')
-          PACKAGES=`opam list -s --depends-on coq-{{ shortname }} --coinstallable-with $PINS`
+          PACKAGES=`opam list -s --depends-on {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }} --coinstallable-with $PINS`
           if ! [ -z "$PACKAGES" ]
           then opam install -t $PACKAGES
           fi
