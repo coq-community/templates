@@ -44,6 +44,11 @@ fields:
       type: bool
       used:
         - README.md
+  - ci_test_dependants:
+      type: bool
+      used:
+        - config.yml
+        - .travis.yml
   - community:
       type: bool
       description: >
