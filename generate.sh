@@ -6,7 +6,7 @@ get_yaml() {
     # Arg 1: the meta.yml path
     # STDIN: the mustache code
     local meta="$1" temp
-    temp=$(mktemp --tmpdir --suffix .yml template-XXX)
+    temp=$(mktemp template-XXX)
     cat > "$temp"
     mustache "$meta" "$temp"
     rm -f -- "$temp"
