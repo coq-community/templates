@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: yaml-lint
-        uses: ibiqlik/action-yamllint@master
+        uses: ibiqlik/action-yamllint@v1
         with:
           file_or_dir: ref.yml
