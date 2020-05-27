@@ -17,7 +17,7 @@ jobs:
     - checkout
     - run:
         name: Pull submodules
-        command: git submodule update --init --remote
+        command: git submodule update --init
     - run:
         name: Configure environment
         command: echo . ~/.profile >> $BASH_ENV
@@ -37,7 +37,7 @@ jobs:
     - run:
         name: Test dependants
         command: |
-          PINS=($(opam list -s --pinned --columns=package)); PINS=$(IFS=, ; echo "${PINS[*]}")
+          PINS=$(opam list -s --pinned --columns=package | xargs | tr ' ' ,)
           PACKAGES=`opam list -s --depends-on {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }} --coinstallable-with $PINS`
           if [ -n "$PACKAGES" ]
           then opam install -t $PACKAGES

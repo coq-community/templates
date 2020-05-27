@@ -31,7 +31,7 @@ language: shell
       sudo chown -R coq:coq /home/coq/${PACKAGE}
       opam install ${PACKAGE} -v -y -j ${NJOBS}
 {{# ci_test_dependants }}
-      PINS=($(opam list -s --pinned --columns=package)); PINS=$(IFS=, ; echo "${PINS[*]}")
+      PINS=$(opam list -s --pinned --columns=package | xargs | tr ' ' ,)
       PACKAGES=`opam list -s --depends-on {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }} --coinstallable-with $PINS`
       if [ -n "$PACKAGES" ]
       then opam install -t $PACKAGES
