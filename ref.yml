@@ -44,6 +44,7 @@ keys:
       type: bool
       used:
         - config.yml
+        - .travis.yml
   - community:
       type: bool
       used:

@@ -30,6 +30,13 @@ language: shell
       set -ex
       sudo chown -R coq:coq /home/coq/${PACKAGE}
       opam install ${PACKAGE} -v -y -j ${NJOBS}
+{{# ci_test_dependants }}
+      PINS=($(opam list -s --pinned --columns=package)); PINS=$(IFS=, ; echo "${PINS[*]}")
+      PACKAGES=`opam list -s --depends-on {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }} --coinstallable-with $PINS`
+      if [ -n "$PACKAGES" ]
+      then opam install -t $PACKAGES
+      fi
+{{/ ci_test_dependants }}
       "
   - docker stop COQ  # optional
   - echo -en 'travis_fold:end:script\\r'

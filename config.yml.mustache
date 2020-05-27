@@ -37,9 +37,9 @@ jobs:
     - run:
         name: Test dependants
         command: |
-          PINS=$(echo `opam list -s --pinned --columns=package` | sed 's/ /,/g')
+          PINS=($(opam list -s --pinned --columns=package)); PINS=$(IFS=, ; echo "${PINS[*]}")
           PACKAGES=`opam list -s --depends-on {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }} --coinstallable-with $PINS`
-          if ! [ -z "$PACKAGES" ]
+          if [ -n "$PACKAGES" ]
           then opam install -t $PACKAGES
           fi
 {{/ ci_test_dependants }}
