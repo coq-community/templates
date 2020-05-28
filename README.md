@@ -17,15 +17,17 @@ This repository contains template files for use in generating configuration file
 and other boilerplate for coq-community (or external) Coq projects.
 
 Files ending in `.mustache` have values to fill in (and the `.mustache`
-extension should be removed from the resulting files). Filling in values can (and should)
-be done automatically using a mustache command-line tool. There are many mustache
+extension should be removed from the resulting files). Filling in values
+is done automatically using a mustache command-line tool. There are many mustache
 implementations available from the [Mustache website](https://mustache.github.io).
 Note that these implementations can differ w.r.t. the supported input
 format (for your project metadata). We suggest you rely on a
 YAML-compatible mustache implementation such as `ruby-mustache`
 (available for instance as an
 [Ubuntu](https://packages.ubuntu.com/ruby-mustache) or
-[Debian](https://packages.debian.org/ruby-mustache) package).
+[Debian](https://packages.debian.org/ruby-mustache) package)
+or `mustache-go` (available as a
+[Nix](https://nixos.org/nixos/packages.html?attr=mustache-go&channel=nixpkgs-unstable) package).
 
 To enable generating files using one such mustache tool, you should
 thus write a `meta.yml` file containing the required values. For
@@ -59,8 +61,11 @@ Regarding continuous integration, the `generate.sh` script will create:
     [(based on opam + Nix)](./.travis.yml.mustache),
 * or a [GitHub Action](https://help.github.com/en/actions) workflow
     [(based on opam)](./coq-action.yml.mustache),
+* or a [CircleCI](https://circleci.com/) configuration
+    [(based on opam)](./config.yml.mustache),
 
-depending on whether `meta.yml` contains `travis: true` or `action: true`.
+depending on whether `meta.yml` contains `travis: true` or `action: true`
+or `circleci: true`.
 
 If you only want to generate certain files, please specify them as shell script arguments:
 ```shell
