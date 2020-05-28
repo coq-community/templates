@@ -9,6 +9,9 @@ fields:
         - index.md
   - shortname:
       required: true
+      description: >
+        The name of the repository.  Will also be used to build the
+        name of the opam file, unless opam_file is provided.
       used:
         - README.md
         - index.md
