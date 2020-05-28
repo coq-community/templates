@@ -2,7 +2,7 @@
 
 [![Contributing][contributing-shield]][contributing-link]
 [![Code of Conduct][conduct-shield]][conduct-link]
-[![Gitter][gitter-shield]][gitter-link]
+[![Zulip][zulip-shield]][zulip-link]
 
 [contributing-shield]: https://img.shields.io/badge/contributions-welcome-%23f7931e.svg
 [contributing-link]: https://github.com/coq-community/manifesto/blob/master/CONTRIBUTING.md
@@ -10,8 +10,8 @@
 [conduct-shield]: https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-%23f15a24.svg
 [conduct-link]: https://github.com/coq-community/manifesto/blob/master/CODE_OF_CONDUCT.md
 
-[gitter-shield]: https://img.shields.io/badge/chat-on%20gitter-%23c1272d.svg
-[gitter-link]: https://gitter.im/coq-community/Lobby
+[zulip-shield]: https://img.shields.io/badge/chat-on%20zulip-%23c1272d.svg
+[zulip-link]: https://coq.zulipchat.com/#narrow/stream/237663-coq-community-devs.20.26.20users
 
 This repository contains template files for use in generating configuration files
 and other boilerplate for coq-community (or external) Coq projects.
