@@ -239,6 +239,11 @@ fields:
         do not suit your project.
       used:
         - README.md
+  - make_target:
+      required: false
+      used:
+        - README.md
+        - coq.opam
   - extracted:
       required: false
       fields:
