@@ -309,6 +309,10 @@ fields:
         The part of the README that is not auto-generated.
       used:
         - README.md
+  - coqdoc_index:
+      description: Link to Coqdoc pages in index.
+      used:
+        - index.md
   - opam-file-maintainer:
       required: false
       default: palmskog@gmail.com
