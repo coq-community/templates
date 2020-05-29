@@ -12,7 +12,7 @@ synopsis: "{{& synopsis }}"
 description: """
 {{& description }}"""
 
-build: [make "-j%{jobs}%"]
+build: [make "-j%{jobs}%" {{ make_target }}]
 install: [make "install"]
 depends: [
 {{# supported_ocaml_versions }}
