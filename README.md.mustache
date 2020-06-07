@@ -97,7 +97,7 @@ opam install {{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}
 To instead build and install manually, do:
 
 ``` shell
-git clone {{# submodule }}--recurse-submodules{{/ submodule }} https://github.com/{{ organization }}/{{ shortname }}.git
+git clone {{# submodule }}--recurse-submodules {{/ submodule }}https://github.com/{{ organization }}/{{ shortname }}.git
 cd {{ shortname }}
 make {{ make_target }}  # or make -j <number-of-cores-on-your-machine> {{ make_target }}
 make install
