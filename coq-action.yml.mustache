@@ -22,8 +22,10 @@ jobs:
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
+{{# submodule }}
     - name: Checkout submodules
       uses: textbook/git-checkout-submodule-action@2.1.1
+{{/ submodule }}
     - uses: coq-community/docker-coq-action@v1
       with:
         opam_file: '{{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.opam'

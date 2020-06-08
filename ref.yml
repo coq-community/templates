@@ -69,6 +69,12 @@ fields:
       used:
         - README.md
         - coq.opam
+  - submodule:
+      type: bool
+      used:
+        - README.md
+        - config.yml
+        - coq-action.yml
   - doi:
       required: false
       used:

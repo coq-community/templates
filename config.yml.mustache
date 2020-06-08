@@ -15,9 +15,11 @@ jobs:
       TERM: xterm
     steps:
     - checkout
+{{# submodule }}
     - run:
         name: Pull submodules
-        command: git submodule update --init
+        command: git submodule update --init --recursive
+{{/ submodule }}
     - run:
         name: Configure environment
         command: echo . ~/.profile >> $BASH_ENV
