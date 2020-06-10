@@ -52,7 +52,7 @@ you have already written `<your-project>/meta.yml`, in the following way:
 ```shell
 cd <your-project>
 TMP=$(mktemp -d); git clone https://github.com/coq-community/templates.git $TMP
-$TMP/generate.sh # nix users can do instead: nix-shell -p mustache-go --run "$TMP/generate.sh"
+$TMP/generate.sh # nix users can do instead: nix-shell -p mustache-go --run $TMP/generate.sh
 git add <the_generated_files>
 ```
 Regarding continuous integration, the `generate.sh` script will create:
