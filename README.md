@@ -48,12 +48,11 @@ Other projects using the templates in a similar way include
 All the keys used by templates files are specified in [`ref.yml`](ref.yml).
 
 You can generate the standard files from the templates, provided
-you have already written `meta.yml`, in the following way:
+you have already written `<your-project>/meta.yml`, in the following way:
 ```shell
-cd <your_coq_project> && cd ..
-git clone https://github.com/coq-community/templates.git
-cd -
-../templates/generate.sh
+cd <your-project>
+TMP=$(mktemp -d); git clone https://github.com/coq-community/templates.git $TMP
+$TMP/generate.sh # nix users can do instead: nix-shell -p mustache-go --run "$TMP/generate.sh"
 git add <the_generated_files>
 ```
 Regarding continuous integration, the `generate.sh` script will create:
@@ -69,7 +68,7 @@ or `circleci: true`.
 
 If you only want to generate certain files, please specify them as shell script arguments:
 ```shell
-../templates/generate.sh README.md coq-aac-tactics.opam
+$TMP/generate.sh README.md coq-aac-tactics.opam
 ```
 
 Keeping generated files under version control is not ideal, but `README.md` has to exist,
