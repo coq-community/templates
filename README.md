@@ -15,6 +15,7 @@
 
 This repository contains template files for use in generating configuration files
 and other boilerplate for coq-community (or external) Coq projects.
+All content in the repository is licensed under the [Unlicense](LICENSE).
 
 Files ending in `.mustache` have values to fill in (and the `.mustache`
 extension should be removed from the resulting files). Filling in values
