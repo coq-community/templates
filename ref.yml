@@ -373,6 +373,16 @@ fields:
             examples:
               - '8.11'
               - 'dev'
+        - repo:
+            required: false
+            description: >
+              Docker repository supporting the given docker tag.
+              Defaults to 'coqorg/coq'.
+            examples:
+              - 'mathcomp/mathcomp'
+              - 'mathcomp/mathcomp-dev'
+            used:
+              - .travis.yml
       used:
         - .travis.yml
         - coq-action.yml
