@@ -14,11 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        coq_version:
+        image:
 {{# tested_coq_opam_versions }}
-          - '{{ version }}'
+          - '{{ repo }}{{^ repo }}coqorg/coq{{/ repo }}:{{ version }}'
 {{/ tested_coq_opam_versions }}
-        ocaml_version: ['minimal']
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
@@ -29,10 +28,9 @@ jobs:
     - uses: coq-community/docker-coq-action@v1
       with:
         opam_file: '{{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.opam'
-{{! Change delimiters to avoid the next two lines being parsed as mustache syntax. }}
+{{! Change delimiters to avoid the next line being parsed as mustache syntax. }}
 {{=<% %>=}}
-        coq_version: ${{ matrix.coq_version }}
-        ocaml_version: ${{ matrix.ocaml_version }}
+        custom_image: ${{ matrix.image }}
 
 # See also:
 # https://github.com/coq-community/docker-coq-action#readme

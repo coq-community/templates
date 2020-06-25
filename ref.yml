@@ -383,6 +383,7 @@ fields:
               - 'mathcomp/mathcomp-dev'
             used:
               - .travis.yml
+              - coq-action.yml
       used:
         - .travis.yml
         - coq-action.yml
