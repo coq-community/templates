@@ -62,7 +62,7 @@ jobs:
   # Test supported versions of Coq via OPAM
 {{# tested_coq_opam_versions }}
   - env:
-    - COQ_IMAGE=coqorg/coq:{{ version }}
+    - COQ_IMAGE={{ repo }}{{^ repo }}coqorg/coq{{/ repo }}:{{ version }}
     - PACKAGE={{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.{{ opam-file-version }}{{^ opam-file-version }}dev{{/ opam-file-version }}
     - NJOBS=2
     <<: *OPAM
