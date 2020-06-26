@@ -20,17 +20,17 @@ jobs:
 {{/ tested_coq_opam_versions }}
       fail-fast: false
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 {{# submodule }}
-    - name: Checkout submodules
-      uses: textbook/git-checkout-submodule-action@2.1.1
+      - name: Checkout submodules
+        uses: textbook/git-checkout-submodule-action@2.1.1
 {{/ submodule }}
-    - uses: coq-community/docker-coq-action@v1
-      with:
-        opam_file: '{{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.opam'
+      - uses: coq-community/docker-coq-action@v1
+        with:
+          opam_file: '{{ opam_name }}{{^ opam_name }}coq-{{ shortname }}{{/ opam_name }}.opam'
 {{! Change delimiters to avoid the next line being parsed as mustache syntax. }}
 {{=<% %>=}}
-        custom_image: ${{ matrix.image }}
+          custom_image: ${{ matrix.image }}
 
 # See also:
 # https://github.com/coq-community/docker-coq-action#readme
