@@ -6,7 +6,7 @@ jobs:
       coq:
         type: string
     docker:
-    - image: coqorg/coq:<<parameters.coq>>
+    - image: <<parameters.coq>>
     resource_class: medium
     environment:
       OPAMJOBS: 2
@@ -57,6 +57,6 @@ workflows:
     jobs:
 {{# tested_coq_opam_versions }}
     - build:
-        name: "Coq {{ version }}"
-        coq: "{{ version }}"
+        name: "{{ repo }}{{^ repo }}Coq{{/ repo }} {{ version }}"
+        coq: "{{ repo }}{{^ repo }}coqorg/coq{{/ repo }}:{{ version }}"
 {{/ tested_coq_opam_versions }}

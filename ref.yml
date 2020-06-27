@@ -384,6 +384,7 @@ fields:
             used:
               - .travis.yml
               - coq-action.yml
+              - config.yml
       used:
         - .travis.yml
         - coq-action.yml
