@@ -11,7 +11,7 @@ fields:
       required: true
       description: >
         The name of the repository.  Will also be used to build the
-        name of the opam file, unless opam_file is provided.
+        name of the opam file, unless opam_name is provided.
       used:
         - README.md
         - index.md
@@ -19,6 +19,8 @@ fields:
         - extracted.opam
         - config.yml
         - default.nix
+        - dune
+        - dune-project
   - opam_name:
       required: false
       default: coq-{{ shortname }}
@@ -26,6 +28,8 @@ fields:
         - README.md
         - .travis.yml
         - coq-action.yml
+        - dune-project
+        - dune
   - organization:
       required: true
       used:
@@ -75,6 +79,11 @@ fields:
         - README.md
         - config.yml
         - coq-action.yml
+  - dune:
+      type: bool
+      used:
+        - README.md
+        - coq.opam
   - doi:
       required: false
       used:
@@ -83,6 +92,7 @@ fields:
       required: true
       used:
         - coq.opam
+        - dune
   - description:
       required: true
       used:
@@ -231,6 +241,7 @@ fields:
       used:
         - README.md
         - coq.opam
+        - dune
   - publications:
       type: list
       item_fields:

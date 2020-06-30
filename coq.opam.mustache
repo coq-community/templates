@@ -12,12 +12,20 @@ synopsis: "{{& synopsis }}"
 description: """
 {{& description }}"""
 
+{{# dune }}
+build: ["dune" "build" "-p" name "-j" jobs]
+{{/ dune }}
+{{^ dune }}
 build: [make "-j%{jobs}%" {{ make_target }}]
 install: [make "install"]
+{{/ dune }}
 depends: [
 {{# supported_ocaml_versions }}
   "ocaml" {{& opam }}
 {{/ supported_ocaml_versions }}
+{{# dune }}
+  "dune" {>= "2.5"}
+{{/ dune }}
   "coq" {{& supported_coq_versions.opam }}
 {{# dependencies }}
 {{# opam }}
