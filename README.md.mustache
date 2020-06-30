@@ -79,7 +79,8 @@
 - Compatible OCaml versions: {{& text }}
 {{/ supported_ocaml_versions }}
 - Additional dependencies:{{# dependencies }}
-  - {{& description }}{{/ dependencies }}{{^ dependencies }} none{{/ dependencies }}
+  - {{& description }}{{/ dependencies }}{{^ dependencies }}{{^ dune }} none{{/ dune }}{{/ dependencies }}{{# dune }}
+  - [Dune](https://dune.build) 2.5 or later{{/ dune }}
 - Coq namespace: `{{ namespace }}`
 - Related publication(s):{{# publications }}
   - [{{& pub_title }}]({{ pub_url }}) {{# pub_doi }}doi:[{{ pub_doi }}](https://doi.org/{{ pub_doi }}){{/ pub_doi}}{{/ publications }}{{^ publications }} none{{/ publications }}
@@ -99,8 +100,14 @@ To instead build and install manually, do:
 ``` shell
 git clone {{# submodule }}--recurse-submodules {{/ submodule }}https://github.com/{{ organization }}/{{ shortname }}.git
 cd {{ shortname }}
+{{# dune }}
+dune build
+dune install
+{{/ dune}}
+{{^ dune }}
 make {{ make_target }}  # or make -j <number-of-cores-on-your-machine> {{ make_target }}
 make install
+{{/ dune }}
 ```
 {{/ build }}
 
