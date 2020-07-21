@@ -237,7 +237,7 @@ fields:
       used:
         - coq.opam
   - namespace:
-      required: true
+      required: false
       used:
         - README.md
         - coq.opam
