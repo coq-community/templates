@@ -123,6 +123,11 @@ fields:
             used:
               - coq.opam
               - extracted.opam
+  - after_authors:
+      required: false
+      used:
+        - README.md
+        - index.md
   - maintainers:
       type: list
       item_fields:
