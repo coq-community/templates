@@ -342,9 +342,13 @@ fields:
       used:
         - README.md
   - coqdoc_index:
-      description: Link to Coqdoc pages in index.
+      required: false
+      description: Position of Coqdoc main page relative to index
       used:
         - index.md
+        - README.md
+      examples:
+        - "docs/latest/coqdoc/toc.html"
   - opam-file-maintainer:
       required: false
       default: palmskog@gmail.com

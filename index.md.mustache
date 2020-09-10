@@ -30,12 +30,11 @@ The current stable release of {{& fullname }} can be [downloaded from GitHub](ht
 
 ## Documentation
 
-{{ coqdoc_index }}
-{{^ coqdoc_index }}
-The coqdoc presentations of the source files from releases can be browsed online.
+{{# coqdoc_index }}
+The coqdoc presentation of the source files can be browsed [here]({{ coqdoc_index }})
 {{/ coqdoc_index }}
 
-Other related publications, if any, are listed below.
+Related publications, if any, are listed below.
 
 {{# publications }}
 - [{{& pub_title }}]({{ pub_url }}) {{# pub_doi }}doi:[{{ pub_doi }}](https://doi.org/{{ pub_doi }}){{/ pub_doi}}
