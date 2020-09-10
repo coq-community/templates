@@ -343,7 +343,7 @@ fields:
         - README.md
   - coqdoc_index:
       required: false
-      description: Position of to Coqdoc pages relative to index
+      description: Position of Coqdoc main page relative to index
       used:
         - index.md
         - README.md
