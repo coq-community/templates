@@ -22,11 +22,11 @@
 {{/ doi }}
 
 {{# travis }}
-[travis-shield]: https://travis-ci.com/{{ organization }}/{{ shortname }}.svg?branch=master
+[travis-shield]: https://travis-ci.com/{{ organization }}/{{ shortname }}.svg?branch={{branch}}{{^branch}}master{{/branch}}
 [travis-link]: https://travis-ci.com/{{ organization }}/{{ shortname }}/builds
 {{/ travis }}
 {{# action }}
-[action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/CI/badge.svg?branch=master
+[action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
 [action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow%3ACI
 {{/ action }}
 {{# circleci }}
