@@ -21,6 +21,14 @@ fields:
         - default.nix
         - dune
         - dune-project
+  - branch:
+      required: false
+      description: >
+        The name of the branch of reference to consider to get the latest
+        version of the software. It will also be used for the CI badges.
+        If omitted, default value is “master”.
+        use:
+          - README.md
   - opam_name:
       required: false
       default: coq-{{ shortname }}
