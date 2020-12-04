@@ -35,12 +35,12 @@ mustache tool, one needs to provide a `meta.yml` file containing the required
 values. Depending on your project and the desired setup, the `meta.yml` files of
 one of the following projects may serve as a starting point:
 
-- [Huffman](https://github.com/coq-community/huffman) (pure library, no dependencies, coq-community) :
+- [Huffman](https://github.com/coq-community/huffman) (pure library, no dependencies, coq-community):
   [meta.yml](https://github.com/coq-community/huffman/blob/master/meta.yml)
-- [AAC_tactics](https://github.com/coq-community/aac-tactics) (plugin, one-branch per Coq version):
-  [meta.yml](https://github.com/coq-community/aac-tactics/blob/master/meta.yml).
-- [reglang](https://github.com/coq-community/reglang) (pure library, mathcomp, custom docker images) :
-  [meta.yml](https://github.com/coq-community/reglang/blob/master/meta.yml).
+- [AAC Tactics](https://github.com/coq-community/aac-tactics) (plugin, one-branch per Coq version):
+  [meta.yml](https://github.com/coq-community/aac-tactics/blob/master/meta.yml)
+- [reglang](https://github.com/coq-community/reglang) (pure library, mathcomp, custom docker images):
+  [meta.yml](https://github.com/coq-community/reglang/blob/master/meta.yml)
 - [StructTact](https://github.com/uwplse/StructTact) (pure library, no dependencies, no coq-community):
   [meta.yml](https://github.com/uwplse/StructTact/blob/master/meta.yml)
 
