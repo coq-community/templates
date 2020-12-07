@@ -68,7 +68,7 @@ depending on whether `meta.yml` contains `travis: true` or `action: true`
 or `circleci: true`.
 
 For `coq-community` projects, using `travis: true` is currently
-disabled due to a very limed build-time allowance from Travis. Using
+disabled due to a very limited build-time allowance from Travis. Using
 GitHub actions is a reasonable choice. 
 
 If you only want to generate certain files, you can specify them as arguments to the shell script:
@@ -91,7 +91,7 @@ mustache meta.yml ../templates/.travis.yml.mustache > .travis.yml
 
 The generated files should be kept under version control, as
 continuous integration needs its config file as well as the `.opam`
-file to be present in the repository and and GitHub needs the
+file to be present in the repository and GitHub needs the
 `README.md` file order to display it.
 
 You can find documentation, advice, and guidelines on how to maintain a Coq project
