@@ -48,6 +48,17 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
+        nix-action.yml)
+            action_mustache='{{ action }}'
+            action_bool=$(get_yaml meta.yml <<<"$action_mustache")
+            nix_mustache='{{ tested_coq_nix_versions }}'
+            nix_bool=$(get_yaml meta.yml <<<"$nix_mustache")
+            if [ -n "$action_bool" ] && [ -n "$nix_bool" ] && [ "$nix_bool" != false ] && [ "$action_bool" != false ]; then
+                mkdir -p -v .github/workflows && target=".github/workflows/$target"
+            else
+                continue
+            fi
+            ;;
         .travis.yml)
             mustache='{{ travis }}'
             bool=$(get_yaml meta.yml <<<"$mustache")

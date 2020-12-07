@@ -64,7 +64,7 @@ Regarding continuous integration, the `generate.sh` script will create:
 * a [Travis CI](https://docs.travis-ci.com/) configuration
     [(based on opam + Nix)](./.travis.yml.mustache),
 * or a [GitHub Action](https://help.github.com/en/actions) workflow
-    [(based on opam)](./coq-action.yml.mustache),
+    (based on [opam](./coq-action.yml.mustache) or [Nix](./nix-action.yml.mustache)),
 * or a [CircleCI](https://circleci.com/) configuration
     [(based on opam)](./config.yml.mustache),
 

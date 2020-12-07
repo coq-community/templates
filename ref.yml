@@ -87,6 +87,7 @@ fields:
         - README.md
         - config.yml
         - coq-action.yml
+        - nix-action.yml
   - dune:
       type: bool
       used:
@@ -389,6 +390,7 @@ fields:
               commit hash.
       used:
         - .travis.yml
+        - nix-action.yml
   - tested_coq_opam_versions:
       type: list
       item_fields:
