@@ -1,4 +1,4 @@
-#  Coq-community Templates
+# Templates for Coq projects in coq-community and elsewhere
 
 [![Contributing][contributing-shield]][contributing-link]
 [![Code of Conduct][conduct-shield]][conduct-link]
