@@ -35,7 +35,7 @@ fields:
       used:
         - README.md
         - .travis.yml
-        - coq-action.yml
+        - docker-action.yml
         - dune-project
         - dune
   - organization:
@@ -86,7 +86,7 @@ fields:
       used:
         - README.md
         - config.yml
-        - coq-action.yml
+        - docker-action.yml
         - nix-action.yml
   - dune:
       type: bool
@@ -413,9 +413,9 @@ fields:
               - 'mathcomp/mathcomp-dev'
             used:
               - .travis.yml
-              - coq-action.yml
+              - docker-action.yml
               - config.yml
       used:
         - .travis.yml
-        - coq-action.yml
+        - docker-action.yml
         - config.yml

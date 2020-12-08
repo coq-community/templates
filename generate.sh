@@ -39,7 +39,7 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
-        coq-action.yml)
+        docker-action.yml)
             mustache='{{ action }}'
             bool=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$bool" ] && [ "$bool" != false ]; then
