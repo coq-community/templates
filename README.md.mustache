@@ -4,7 +4,10 @@
 [![Travis][travis-shield]][travis-link]
 {{/ travis }}
 {{# action }}
-[![CI][action-shield]][action-link]
+[![Docker-based CI][docker-action-shield]][docker-action-link]
+{{# nix }}
+[![Nix-based CI][nix-action-shield]][nix-action-link]
+{{/ nix }}
 {{/ action }}
 {{# circleci }}
 [![CircleCI][circleci-shield]][circleci-link]
@@ -26,8 +29,13 @@
 [travis-link]: https://travis-ci.com/{{ organization }}/{{ shortname }}/builds
 {{/ travis }}
 {{# action }}
-[action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
-[action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow%3ACI
+[docker-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/docker-action.yml/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
+[docker-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow:"Docker-based CI"
+{{# nix }}
+
+[nix-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/nix-action.yml/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
+[nix-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow:"Nix-based CI"
+{{/ nix }}
 {{/ action }}
 {{# circleci }}
 [circleci-shield]: https://circleci.com/gh/{{ organization }}/{{ shortname }}.svg?style=svg

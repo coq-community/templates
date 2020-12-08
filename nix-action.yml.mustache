@@ -16,6 +16,7 @@ jobs:
         version_or_url:
 {{# tested_coq_nix_versions }}
           - '{{ version_or_url }}'
+{{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}          - 'https://github.com/coq/coq-on-cachix/tarball/master'
 {{/ tested_coq_nix_versions }}
       fail-fast: false
     steps:

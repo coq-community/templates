@@ -59,6 +59,13 @@ fields:
       type: bool
       used:
         - README.md
+  - nix:
+      type: bool
+      description: >
+        Set to true to generate a default.nix file and to test it.
+      used:
+        - README.md
+        - .travis.yml
   - ci_test_dependants:
       type: bool
       used:
@@ -371,6 +378,7 @@ fields:
         - .travis.yml
   - tested_coq_nix_versions:
       type: list
+      description: If empty, the master branch of Coq will be tested.
       item_fields:
         - version_or_url:
             required: true
