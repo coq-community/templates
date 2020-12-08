@@ -109,14 +109,16 @@ fields:
         - coq.opam
   - chat:
       description: >
-        Url to the chat room associated with this project.
+        Adds a badge with a link to a chat room.
       required: false
       used:
         - README.md
       item_fields:
+        - url:
+            required: true
         - shield:
             description: >
-              Badge associated with the website of the chat room.
+              Name of the chat to be displayed in the shield icon.
             default: ""
             examples: zulip, matrix, discourse
   - authors:
