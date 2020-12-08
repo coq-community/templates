@@ -107,6 +107,18 @@ fields:
         - README.md
         - index.md
         - coq.opam
+  - chat:
+      description: >
+        Url to the chat room associated with this project.
+      required: false
+      used:
+        - README.md
+      item_fields:
+        - shield:
+            description: >
+              Badge associated with the website of the chat room.
+            default: ""
+            examples: zulip, matrix, discourse
   - authors:
       required: true
       type: list
