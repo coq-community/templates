@@ -6,6 +6,9 @@
 {{# action }}
 [![CI][action-shield]][action-link]
 {{/ action }}
+{{# chat }}
+[![Chat][chat-shield]][chat-link]
+{{/ chat }}
 {{# circleci }}
 [![CircleCI][circleci-shield]][circleci-link]
 {{/ circleci }}
@@ -29,6 +32,10 @@
 [action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
 [action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow%3ACI
 {{/ action }}
+{{# chat }}
+[chat-shield]: https://img.shields.io/badge/{{ shield }}-join_chat-brightgreen.svg
+[chat-link]: {{ url }}
+{{/ chat }}
 {{# circleci }}
 [circleci-shield]: https://circleci.com/gh/{{ organization }}/{{ shortname }}.svg?style=svg
 [circleci-link]:   https://circleci.com/gh/{{ organization }}/{{ shortname }}

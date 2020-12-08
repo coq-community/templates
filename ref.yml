@@ -107,6 +107,20 @@ fields:
         - README.md
         - index.md
         - coq.opam
+  - chat:
+      description: >
+        Adds a badge with a link to a chat room.
+      required: false
+      used:
+        - README.md
+      item_fields:
+        - url:
+            required: true
+        - shield:
+            description: >
+              Name of the chat to be displayed in the shield icon.
+            default: ""
+            examples: zulip, matrix, discourse
   - authors:
       required: true
       type: list
