@@ -14,20 +14,21 @@ get_yaml() {
 
 for f in "$srcdir"/{,.}*.mustache; do
     target=$(basename "$f" .mustache)
+    eval_instead_of_mustache=false
     case "$target" in
         coq.opam)
             mustache='{{ opam_name }}'
             opam_name=$(get_yaml meta.yml <<<"$mustache")
-	    if [ -n "$opam_name" ]; then
-		target=${target/coq/$opam_name}
-	    else
-		mustache='{{ shortname }}'
-		shortname=$(get_yaml meta.yml <<<"$mustache")
-		if [ -n "$shortname" ]; then
-		    target=${target/coq/coq-$shortname}
+	        if [ -n "$opam_name" ]; then
+		    target=${target/coq/$opam_name}
 	        else
-		    continue
-		fi
+		    mustache='{{ shortname }}'
+		    shortname=$(get_yaml meta.yml <<<"$mustache")
+		        if [ -n "$shortname" ]; then
+		            target=${target/coq/coq-$shortname}
+	                else
+		            continue
+		        fi
             fi
             ;;
         extracted.opam)
@@ -95,20 +96,39 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
-	config.yml)
-	    mustache='{{ circleci }}'
-	    bool=$(get_yaml meta.yml <<<"$mustache")
-            if [ -n "$bool" ] && [ "$bool" != false ]; then
-                mkdir -p -v .circleci && target=".circleci/$target"
-            else
-                continue
-            fi
-            ;;
+        config.yml)
+	        mustache='{{ circleci }}'
+	        bool=$(get_yaml meta.yml <<<"$mustache")
+                if [ -n "$bool" ] && [ "$bool" != false ]; then
+                    mkdir -p -v .circleci && target=".circleci/$target"
+                else
+                    continue
+                fi
+                ;;
         default.nix)
             mustache='{{ nix }}'
             bool=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$bool" ] && [ "$bool" != false ]; then
                 : noop
+            else
+                continue
+            fi
+            ;;
+        coq-nix-toolbox.nix)
+            mustache='{{ nix }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                mkdir -p -v .nix && target=".nix/$target"
+                eval_instead_of_mustache=true
+            else
+                continue
+            fi
+            ;;
+        fallback-config.nix)
+            mustache='{{ nix }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                mkdir -p -v .nix && target=".nix/$target"
             else
                 continue
             fi
@@ -123,6 +143,10 @@ for f in "$srcdir"/{,.}*.mustache; do
     if [ $# -gt 0 ] && [ $listed != true ]; then
 	continue
     fi
-    echo "Generating $target..."
-    mustache meta.yml "$f" > "$target"
+    echo "Generating $target"
+    if [ "$eval_instead_of_mustache" = true ]; then
+        eval "echo \"$(cat $f)\"" > "$target"
+    else
+        mustache meta.yml "$f" > "$target"
+    fi
 done

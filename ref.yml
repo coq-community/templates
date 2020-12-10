@@ -40,6 +40,11 @@ fields:
         - docker-action.yml
         - dune-project
         - dune
+  - nix_name:
+      required: false
+      default: "{{ shortname }}"
+      used:
+        - fallback-config.nix
   - organization:
       required: true
       used:
@@ -246,7 +251,8 @@ fields:
             required: true
             description: >
               The list of Coq packages in nixpkgs can be seen here:
-              https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/top-level/coq-packages.nix
+              https://github.com/NixOS/nixpkgs/blob/\
+              nixpkgs-unstable/pkgs/top-level/coq-packages.nix
               Casing matters and might differ from the opam name.  The
               leading coq- is present only if it is really an integral
               part of the package name.
@@ -341,7 +347,7 @@ fields:
             type: list
             item_fields:
               - description:
-                  requied: true
+                  required: true
             used:
               - README.md
               - extracted.opam
@@ -360,7 +366,8 @@ fields:
                   required: true
                   description: >
                     Docker tag supported by coqorg/coq:
-                    https://github.com/coq-community/docker-coq/wiki#supported-tags
+                    https://github.com/coq-community/docker-coq/wiki\
+                    #supported-tags.
                     Quote the strings, otherwise '8.10' becomes '8.1'.
                   examples:
                     - '8.11'
@@ -392,29 +399,119 @@ fields:
       used:
         - coq.opam
         - .travis.yml
-  - tested_coq_nix_versions:
-      type: list
-      description: If empty, the master branch of Coq will be tested.
-      item_fields:
-        - version_or_url:
-            required: true
-            description: >
-              This can be a version number of a version packaged in
-              nixpkgs (example: 8.5, 8.11).  Cf. the coqPackages_8_XX
-              attributes defined at the end of this file:
-              https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/top-level/coq-packages.nix
-              (Quote the version number, otherwise '8.10' becomes '8.1'.)
-
-              Or this can be a URL, to test your project with a
-              version of Coq under development.  Typically this is
-              https://github.com/coq/coq-on-cachix/tarball/master but
-              'master' may be replaced by any valid reference like one
-              of the branches available at
-              https://github.com/coq/coq-on-cachix/branches or a valid
-              commit hash.
+  - cachix:
       used:
-        - .travis.yml
-        - nix-action.yml
+        - nix-action.yml.nix
+      type: list
+      description: Cachix repositories to use
+      item_fields:
+        - name:
+            required: true
+            description: Name of the cachix repository
+            examples:
+              - "coq"
+              - "math-comp"
+        - key:
+            required: false
+            description: |
+              Secret signingKey for the repository, the secret should
+              be set from GitHub interface in
+              https://github.com/OWNER/REPO/settings/secrets/actions
+              and generated from https://cachix.org
+              /!\ This is the legacy authentification method and
+              should be deprecated in favor of `token` below.
+            example:
+              - "CACHIX_SIGNING_KEY"
+        - token:
+            required: false
+            description: |
+              Secret authToken for the repository, the secret should
+              be set from GitHub interface in
+              https://github.com/OWNER/REPO/settings/secrets/actions
+              and generated from https://cachix.org
+            example:
+              - "CACHIX_AUTH_TOKEN"
+  - nix-default:
+      used:
+        - default.nix
+      description: >
+        Configure the default.nix to fetch from the generic coq nix toolbox
+      fields:
+        - src:
+            required: false
+            type: string
+            description: Sets a local path instead of a github source
+            examples:
+              - "~/git/coq-nix-toolbox/master"
+        - url:
+            required: false
+            type: string
+            description: Change the git url to fetch from
+            default: "https://github.com/coq-community/coq-nix-toolbox.git"
+        - owner:
+            required: false
+            type: string
+            description: Switch to the github fork of another "owner"
+            default: "coq-community"
+        - ref:
+            required: false
+            type: string
+            description: Change the branch of coq-nix-toolbox to clone
+            default: master
+  - nix-dependencies:
+      used:
+        - fallback-config.nix
+      description: |
+        Lists the dependencies, phrased in terms of nix attributes.
+        No need to list Coq, it is already included.
+        These dependencies will systematically be added to the currently
+        known dependencies, if any more than Coq.
+        /!\ Remove this field as soon as the package is available on nixpkgs.
+        /!\ Manual overlays in `.nix/coq-overlays` should be preferred then.
+      required: false
+      type: list
+      item_fields:
+        type: string
+        description: nix attribute of a dependency
+        example:
+          - "mathcomp"
+          - "coquelicot"
+  - nix-ci:
+      used:
+        - nix-action.yml.nix
+      description: |
+        Generate a nix github action using the following metadata and
+        the contents of the `.nix/config.nix` file, that the user must
+        create.  Otherwise, this attribute cannot be of any use.
+        /!\ It is strongly recommended to activate cachix with at least
+        /!\ the coq cachix activated `cachix: [ {"name": "coq" } ]``
+      type: list
+      item_fields:
+        - job:
+            required: false
+            type: string
+            description: |
+              The name of the job as described in `.nix/config.nix`
+              as in e.g. tasks.<t>.coqPackages.<mypkg>.ci.job = <job>;
+              The default is a `all` job which will run **everything**
+            default: "all"
+        - name:
+            required: false
+            type: string
+            description: |
+              The name to display in the github action web interface.
+              Defaults to the job above.
+            example: "My job"
+        - needs:
+            required: false
+            type: list
+            description: |
+              The list of jobs to wait for before executing these ones.
+            default: "main"
+            item_fields:
+              required: false
+              type: string
+              description: A job to wait for
   - tested_coq_opam_versions:
       type: list
       item_fields:
