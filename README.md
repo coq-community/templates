@@ -64,7 +64,7 @@ Regarding continuous integration, the `generate.sh` script will create:
 * a [Travis CI](https://docs.travis-ci.com/) configuration
     [(based on opam + Nix)](./.travis.yml.mustache),
 * or a [GitHub Action](https://help.github.com/en/actions) workflow
-    [(based on opam)](./coq-action.yml.mustache),
+    (based on [opam](./docker-action.yml.mustache) or [Nix](./nix-action.yml.mustache)),
 * or a [CircleCI](https://circleci.com/) configuration
     [(based on opam)](./config.yml.mustache),
 
@@ -77,7 +77,7 @@ GitHub actions is a reasonable choice.
 
 If you only want to (re)generate certain files, you can specify them as arguments to the shell script:
 ```shell
-$TMP/generate.sh README.md coq-action.yml
+$TMP/generate.sh README.md .github/workflows/docker-action.yml
 ```
 
 All files generated from the templates should be kept under version

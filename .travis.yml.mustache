@@ -43,6 +43,7 @@ language: shell
   - docker stop COQ  # optional
   - echo -en 'travis_fold:end:script\\r'
 
+{{# nix }}
 .nix: &NIX
   language: nix
   install:
@@ -52,16 +53,22 @@ language: shell
   script:
   - nix-build --argstr coq-version-or-url "$COQ" --extra-substituters https://coq.cachix.org --trusted-public-keys "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= coq.cachix.org-1:5QW/wwEnD+l2jvN6QRbRRsa4hBHG3QiQQ26cxu1F5tI="
 
+{{/ nix }}
 jobs:
   include:
 
+{{# nix }}
   # Test supported versions of Coq via Nix
 {{# tested_coq_nix_versions }}
   - env:
     - COQ={{ version_or_url }}
     <<: *NIX
+{{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}  - env:
+    - COQ=https://github.com/coq/coq-on-cachix/tarball/master
+    <<: *NIX
 {{/ tested_coq_nix_versions }}
 
+{{/ nix }}
   # Test supported versions of Coq via OPAM
 {{# tested_coq_opam_versions }}
   - env:

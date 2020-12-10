@@ -1,9 +1,9 @@
-name: CI
+name: Docker CI
 
 on:
   push:
     branches:
-      - master
+      - {{branch}}{{^branch}}master{{/branch}}
   pull_request:
     branches:
       - '**'

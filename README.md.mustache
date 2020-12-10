@@ -4,7 +4,10 @@
 [![Travis][travis-shield]][travis-link]
 {{/ travis }}
 {{# action }}
-[![CI][action-shield]][action-link]
+[![Docker CI][docker-action-shield]][docker-action-link]
+{{# nix }}
+[![Nix CI][nix-action-shield]][nix-action-link]
+{{/ nix }}
 {{/ action }}
 {{# chat }}
 [![Chat][chat-shield]][chat-link]
@@ -29,8 +32,13 @@
 [travis-link]: https://travis-ci.com/{{ organization }}/{{ shortname }}/builds
 {{/ travis }}
 {{# action }}
-[action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
-[action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow%3ACI
+[docker-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/Docker%20CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
+[docker-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow:"Docker%20CI"
+{{# nix }}
+
+[nix-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/Nix%20CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
+[nix-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow:"Nix%20CI"
+{{/ nix }}
 {{/ action }}
 {{# chat }}
 [chat-shield]: https://img.shields.io/badge/{{ shield }}-join_chat-brightgreen.svg
