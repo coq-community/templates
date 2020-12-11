@@ -39,6 +39,33 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
+        dune-project)
+            mustache='{{ dune }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                : noop
+            else
+                continue
+            fi
+            ;;
+        dune)
+            mustache='{{ dune }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                mkdir -p -v theories && target="theories/$target"
+            else
+                continue
+            fi
+            ;;
+        index.md)
+            mustache='{{ coqdoc }}'
+            bool=$(get_yaml meta.yml <<<"$mustache")
+            if [ -n "$bool" ] && [ "$bool" != false ]; then
+                mkdir -p -v resources && target="resources/$target"
+            else
+                continue
+            fi
+            ;;
         docker-action.yml)
             mustache='{{ action }}'
             bool=$(get_yaml meta.yml <<<"$mustache")
