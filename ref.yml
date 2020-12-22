@@ -388,6 +388,12 @@ fields:
         The part of the README that is not auto-generated.
       used:
         - README.md
+  - index_documentation:
+      required: false
+      description: >
+        The part of index.md that is not auto-generated.
+      used:
+        - index.md
   - coqdoc_index:
       required: false
       description: Position of Coqdoc main page relative to index
