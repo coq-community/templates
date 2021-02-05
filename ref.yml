@@ -298,6 +298,10 @@ fields:
       used:
         - README.md
         - coq.opam
+  - test_target:
+      required: false
+      used:
+        - coq.opam
   - extracted:
       required: false
       fields:
