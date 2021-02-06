@@ -23,7 +23,7 @@ build: [make "-j%{jobs}%"{{# make_target }} "{{ make_target }}"{{/ make_target }
 {{# test_target }}
 run-test: [make "-j%{jobs}%" "{{ test_target }}"]
 {{/ test_target }}
-install: [make "install"]
+install: [make "install"{{# install_flag }} "{{ install_flag }}"{{/ install_flag }}]
 {{/ dune }}
 depends: [
 {{# supported_ocaml_versions }}

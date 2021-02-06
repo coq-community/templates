@@ -302,6 +302,10 @@ fields:
       required: false
       used:
         - coq.opam
+  - install_flag:
+      required: false
+      used:
+        - coq.opam
   - extracted:
       required: false
       fields:
