@@ -499,3 +499,20 @@ fields:
               repository or organization level.
             used:
               - nix-action.yml
+  - circleci_after_script:
+      type: string
+      required: false
+      description: >
+        Steps after installing package in CircleCI.
+        Indent by 4 spaces.
+      examples:
+        - |2-
+              - run:
+                  name: Generate Coqdoc
+                  command: |
+                    make -j`nproc` html
+                    tar cfz coqdoc.tgz html
+              - store_artifacts:
+                  path: coqdoc.tgz
+      used:
+        - config.yml
