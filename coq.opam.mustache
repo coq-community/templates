@@ -19,7 +19,10 @@ description: """
 build: ["dune" "build" "-p" name "-j" jobs]
 {{/ dune }}
 {{^ dune }}
-build: [make "-j%{jobs}%" {{ make_target }}]
+build: [make "-j%{jobs}%"{{# make_target }} "{{ make_target }}"{{/ make_target }}]
+{{# test_target }}
+run-test: [make "-j%{jobs}%" "{{ test_target }}"]
+{{/ test_target }}
 install: [make "install"]
 {{/ dune }}
 depends: [
