@@ -482,13 +482,19 @@ fields:
         example:
           - "mathcomp"
           - "coquelicot"
-  - nix-ci:
+  - nix-jobs:
       used:
         - nix-action.yml.nix
       description: |
-        Generate a nix github action using the following metadata and
-        the contents of the `.nix/config.nix` file, that the user must
-        create.  Otherwise, this attribute cannot be of any use.
+        The generated nix action will use the following job description.
+        Each job contain a number of tasks that are executed in parallel.
+        The tasks must be described in either:
+        - the current `meta.yml` through the attribute: `nix-tasks` (see below),
+          the result of which is located in `./nix/fallback-config.nix`.
+        - or a user-created `.nix/config.nix` (which takes priority over
+          `./nix/fallback-config.nix` and the `meta.yml` description of
+          `nix-tasks`, so use with caution).
+        Otherwise, this attribute cannot be of any use.
         /!\ It is strongly recommended to activate cachix with at least
         /!\ the coq cachix activated `cachix: [ {"name": "coq" } ]``
       type: list
@@ -518,6 +524,60 @@ fields:
               required: false
               type: string
               description: A job to wait for
+  - nix-default-task:
+      used:
+        - fallback-config.nix
+      required: false
+      description: Default task to use when typing nix-shell without arguments
+      type: string
+      default: "default"
+  - nix-tasks:
+      used:
+        - fallback-config.nix
+      description: |
+        Describe a set of tasks to be performed in parallel for each job.
+        Suitable to test several versions of dependencies and reverse
+        dependencies.
+      type: list
+      item_fields:
+        - task:
+            required: true
+            type: string
+            description: The name of the task
+        - packages:
+            required: false
+            type: list
+            description: Package to override or add to CI
+            item_fields:
+              - name:
+                  required: true
+                  description: Name of the package attribute from nixpkgs
+                  type: string
+              - from:
+                  required: false
+                  type: string
+                  description: Where to find the attribute
+                  default: coqPackages
+                  examples:
+                    - "coqPackages"
+                    - "ocamlPackages"
+              - version:
+                  required: false
+                  type: string
+                  description: Version number (release, PR, branch or URL)
+                  default: null
+              - ci-job:
+                  required: false
+                  description: Whether to add it to a given job
+                  type: string
+                  default: name of a job
+  - coqproject:
+      used:
+        - fallback-config.nix
+      type: string
+      description: Location of the _CoqProject file
+      required: false
+      default: "./_CoqProject"
   - tested_coq_opam_versions:
       type: list
       item_fields:
