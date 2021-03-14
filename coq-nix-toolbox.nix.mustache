@@ -1,4 +1,16 @@
 # This file was generated from meta.yml, please do not edit manually.
 # Follow the instructions on https://github.com/coq-community/templates to regenerate.
-# However, it not handled by mustache, but by a special eval command
-\"$(git ls-remote https://github.com/coq-community/coq-nix-toolbox refs/heads/master | cut -f1)\"
+{{! BEWARE, this file is evaluated after substitution }}
+{{# nix-default}}
+{{# rev}}
+\"{{rev}}\"
+{{/ rev}}
+{{^ rev}}
+# However, this rev was not handled by mustache, but by a special eval command
+# because you picked the option "nix-default: ..." in "meta.yml"
+\"$(git ls-remote {{url}}{{^ url}}https://github.com/{{owner}}{{^ owner}}coq-community{{/ owner}}/coq-nix-toolbox.git{{/ url}} refs/heads/{{ref}}{{^ ref}}master{{/ ref}} | cut -f1)\"
+{{/ rev}}
+{{/ nix-default}}
+{{^ nix-default}}
+\"de89ff16c149b7a7aec3cfe9d379641ee1aca229\"
+{{/ nix-default}}

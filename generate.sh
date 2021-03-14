@@ -14,7 +14,7 @@ get_yaml() {
 
 for f in "$srcdir"/{,.}*.mustache; do
     target=$(basename "$f" .mustache)
-    eval_instead_of_mustache=false
+    eval_after_mustache=false
     case "$target" in
         coq.opam)
             mustache='{{ opam_name }}'
@@ -119,7 +119,7 @@ for f in "$srcdir"/{,.}*.mustache; do
             bool=$(get_yaml meta.yml <<<"$mustache")
             if [ -n "$bool" ] && [ "$bool" != false ]; then
                 mkdir -p -v .nix && target=".nix/$target"
-                eval_instead_of_mustache=true
+                eval_after_mustache=true
             else
                 continue
             fi
@@ -144,9 +144,8 @@ for f in "$srcdir"/{,.}*.mustache; do
 	continue
     fi
     echo "Generating $target"
-    if [ "$eval_instead_of_mustache" = true ]; then
-        eval "echo \"$(cat $f)\"" > "$target"
-    else
-        mustache meta.yml "$f" > "$target"
+    mustache meta.yml "$f" > "$target"
+    if [ "$eval_after_mustache" = true ]; then
+        eval "echo \"$(cat $target)\"" > "$target"
     fi
 done

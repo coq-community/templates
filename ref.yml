@@ -440,8 +440,10 @@ fields:
   - nix-default:
       used:
         - default.nix
+        - .nix/coq-nix-toolbox.nix
       description: >
-        Configure the default.nix to fetch from the generic coq nix toolbox
+        Configure the default.nix to fetch from the generic coq nix toolbox.
+        This will automatically pin the toolbox to the last version of the provided ref (and if no ref is provided, master).
       fields:
         - src:
             required: false
@@ -464,6 +466,10 @@ fields:
             type: string
             description: Change the branch of coq-nix-toolbox to clone
             default: master
+        - rev:
+            required: false
+            type: string
+            description: Change the pinned rev of coq-nix-toolbox
   - nix-dependencies:
       used:
         - fallback-config.nix
