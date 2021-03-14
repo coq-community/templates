@@ -414,21 +414,27 @@ fields:
         - key:
             required: false
             description: |
-              Secret signingKey for the repository, the secret should
-              be set from GitHub interface in
-              https://github.com/OWNER/REPO/settings/secrets/actions
-              and generated from https://cachix.org
+              Secret signingKey for the repository.
+              The secret should be generated from https://cachix.org
+              and added to Github, either:
+              - at the repository level
+                https://github.com/OWNER/REPO/settings/secrets/actions
+              - or at the organization level:
+                https://github.com/organizations/ORG/settings/secrets/actions
               /!\ This is the legacy authentification method and
-              should be deprecated in favor of `token` below.
+              /!\ is discouraged in favor of `token` below.
             example:
               - "CACHIX_SIGNING_KEY"
         - token:
             required: false
             description: |
-              Secret authToken for the repository, the secret should
-              be set from GitHub interface in
-              https://github.com/OWNER/REPO/settings/secrets/actions
-              and generated from https://cachix.org
+              Secret authToken for the repository.
+              The secret should be generated from https://cachix.org
+              and added to Github, either:
+              - at the repository level
+                https://github.com/OWNER/REPO/settings/secrets/actions
+              - or at the organization level:
+                https://github.com/organizations/ORG/settings/secrets/actions
             example:
               - "CACHIX_AUTH_TOKEN"
   - nix-default:
