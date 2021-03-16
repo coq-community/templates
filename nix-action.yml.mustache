@@ -56,19 +56,19 @@ jobs:
 <%/ nix-tasks%>
 <%# nix-jobs%>
 
-  <%job%><%^ job%>main<%/ job%>:
+  "<%job%><%^job%><%nix_name%><%^nix_name%><% shortname %><%/nix_name%><%/job%>":
     <%# name%>name: <%name%>
     <%/ name%><%^ name%><%/ name%>runs-on: ubuntu-latest
     needs:
       - setup
 <%# needs%>
-      - <%.%>
+      - "<%.%>"
 <%/ needs%>
     strategy:
       matrix:
         task:<%^ nix-tasks%> ${{fromJson(needs.setup.outputs.task)}}<%/ nix-tasks%>
 <%# nix-tasks%>
-          - <%task%>
+          - "<%task%>"
 <%/ nix-tasks%>
     steps:
     - name: Cachix install
@@ -98,13 +98,13 @@ jobs:
 <%/ submodule %>
 <%# needs%>
     - name: Building/fetching previous target <%.%>
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job <%.%>
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "<%.%>"
 <%/ needs%>
     - name: Building/fetching current CI target
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job <%job%><%^ job%>main<%/ job%>
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "<%job%><%^job%><%nix_name%><%^nix_name%><% shortname %><%/nix_name%><%/job%>"
 <%/ nix-jobs%>
 <%^ nix-jobs%>
-  main:
+  "<%nix_name%><%^nix_name%><% shortname %><%/nix_name%>":
     name: Main build
     runs-on: ubuntu-latest
 <%^ nix-tasks%>
@@ -145,7 +145,7 @@ jobs:
 <%/ submodule %>
 <%! Change delimiters to avoid the next line being parsed as mustache syntax. %>
     - name: Building/fetching dependencies
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job dependencies
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "_deps"
     - name: Building/fetching current project
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job main
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "<%nix_name%><%^nix_name%><% shortname %><%/nix_name%>"
 <%/ nix-jobs%>

@@ -13,11 +13,11 @@
 
   ## The attribute to build, either from nixpkgs
   ## of from the overlays located in `.nix/coq-overlays`
-  coq-attribute = "{{nix_name}}{{^nix_name}}{{ shortname }}{{/nix_name}}";
+  attribute = "{{nix_name}}{{^nix_name}}{{ shortname }}{{/nix_name}}";
 
   ## If you want to select a different attribute
   ## to serve as a basis for nix-shell edit this
-  # coq-shell-attribute = "{{nix_name}}";
+  # shell-attribute = "{{nix_name}}{{^nix_name}}{{ shortname }}{{/nix_name}}";
 
   ## Maybe the shortname of the library is different from
   ## the name of the nixpkgs attribute, if so, set it here:
@@ -38,18 +38,18 @@
   ## Select a task to build by default in the following `tasks` set
   ## It will be used when typing nix-shell or nix-build without argument
   ## defaults to "default"
-  select = "{{nix-default-task}}{{^nix-default-task}}default{{/nix-default-task}}";
+  default-task = "{{nix-default-task}}{{^nix-default-task}}default{{/nix-default-task}}";
   tasks."{{nix-default-task}}{{^nix-default-task}}default{{/nix-default-task}}" = {};
 
 {{#nix-tasks}}
   tasks."{{task}}" = {
 {{#packages}}
 {{#version}}
-      {{from}}{{^from}}coqPackages{{/from}}."{{name}}".override.version = "{{version}}";
+      {{location}}{{^location}}coqPackages.{{/location}}"{{name}}".override.version = "{{version}}";
 {{/version}}
-{{#ci-job}}
-      {{from}}{{^from}}coqPackages{{/from}}."{{name}}".ci.job = "{{ci-job}}";
-{{/ci-job}}
+{{#job}}
+      {{location}}{{^location}}coqPackages.{{/location}}"{{name}}".job = "{{job}}";
+{{/job}}
 {{/packages}}
   };
 {{/nix-tasks}}

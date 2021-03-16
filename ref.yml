@@ -560,20 +560,21 @@ fields:
                   required: true
                   description: Name of the package attribute from nixpkgs
                   type: string
-              - from:
+              - location:
                   required: false
                   type: string
                   description: Where to find the attribute
-                  default: coqPackages
+                               followed by a "." if nonempty string
+                  default: "coqPackages."
                   examples:
-                    - "coqPackages"
-                    - "ocamlPackages"
+                    - "coqPackages."
+                    - "ocamlPackages."
               - version:
                   required: false
                   type: string
                   description: Version number (release, PR, branch or URL)
                   default: null
-              - ci-job:
+              - job:
                   required: false
                   description: Whether to add it to a given job
                   type: string
