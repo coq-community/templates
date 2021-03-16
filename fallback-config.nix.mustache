@@ -13,7 +13,7 @@
 
   ## The attribute to build, either from nixpkgs
   ## of from the overlays located in `.nix/coq-overlays`
-  coq-attribute = "{{#nix_name}}{{nix_name}}{{/nix_name}}{{^nix_name}}{{ shortname }}{{/nix_name}}";
+  coq-attribute = "{{nix_name}}{{^nix_name}}{{ shortname }}{{/nix_name}}";
 
   ## If you want to select a different attribute
   ## to serve as a basis for nix-shell edit this
