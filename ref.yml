@@ -443,7 +443,8 @@ fields:
         - .nix/coq-nix-toolbox.nix
       description: >
         Configure the default.nix to fetch from the generic coq nix toolbox.
-        This will automatically pin the toolbox to the last version of the provided ref (and if no ref is provided, master).
+        This will automatically pin the toolbox to the last version of the
+        provided ref (and if no ref is provided, master).
       fields:
         - src:
             required: false
