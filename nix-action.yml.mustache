@@ -97,10 +97,10 @@ jobs:
 <%/ submodule %>
 <%# needs%>
     - name: Building/fetching previous target <%.%>
-      run: nix-build --no-out-link --argstr ci "${{ matrix.task }}" --argstr ci-job <%.%>
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job <%.%>
 <%/ needs%>
     - name: Building/fetching current CI target
-      run: nix-build --no-out-link --argstr ci "${{ matrix.task }}" --argstr ci-job <%job%><%^ job%>main<%/ job%>
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job <%job%><%^ job%>main<%/ job%>
 <%/ nix-jobs%>
 <%^ nix-jobs%>
   main:
@@ -144,7 +144,7 @@ jobs:
 <%/ submodule %>
 <%! Change delimiters to avoid the next line being parsed as mustache syntax. %>
     - name: Building/fetching dependencies
-      run: nix-build --no-out-link --argstr ci "${{ matrix.task }}" --argstr ci-job dependencies
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job dependencies
     - name: Building/fetching current project
-      run: nix-build --no-out-link --argstr ci "${{ matrix.task }}" --argstr ci-job main
+      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job main
 <%/ nix-jobs%>

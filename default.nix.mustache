@@ -2,9 +2,9 @@
 # Follow the instructions on https://github.com/coq-community/templates to regenerate.
 {{# nix-default}}
 { config ? {}, withEmacs ? false, print-env ? false, do-nothing ? false,
-  update-nixpkgs ? false, ci-matrix ? false, ci-job ? null,
+  update-nixpkgs ? false, ci-matrix ? false,
   override ? {}, ocaml-override ? {}, global-override ? {},
-  ci ? (!isNull ci-job), inNixShell ? null
+  task ? null, job ? null, inNixShell ? null, src ? ./.,
 }@args:
 let
 {{# src}}
@@ -18,19 +18,19 @@ let
   };
 {{/ src}}
 in
-(import auto ({src = ./.;} // args)).{{attribute}}{{^ attribute}}nix-auto{{/ attribute}}
+(import auto ({inherit src;} // args)).{{attribute}}{{^ attribute}}nix-auto{{/ attribute}}
 {{/ nix-default}}
 {{^ nix-default}}
 { config ? {}, withEmacs ? false, print-env ? false, do-nothing ? false,
-  update-nixpkgs ? false, ci-matrix ? false, ci-job ? null,
+  update-nixpkgs ? false, ci-matrix ? false,
   override ? {}, ocaml-override ? {}, global-override ? {},
-  ci ? (!isNull ci-job), inNixShell ? null
+  task ? null, job ? null, inNixShell ? null, src ? ./.,
 }@args:
 let auto = fetchGit {
   url = "https://github.com/coq-community/coq-nix-toolbox.git";
   ref = "master";
   rev = import ./.nix/coq-nix-toolbox.nix;
 }; in
-(import auto ({src = ./.;} // args)).nix-auto
+(import auto ({inherit src;} // args)).nix-auto
 {{/ nix-default}}
 
