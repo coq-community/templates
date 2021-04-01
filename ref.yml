@@ -496,7 +496,8 @@ fields:
         The generated nix action will use the following job description.
         Each job contain a number of bundles that are executed in parallel.
         The bundles must be described in either:
-        - the current `meta.yml` through the attribute: `nix-bundles` (see below),
+        - the current `meta.yml` through the attribute: `nix-bundles`
+          (see below),
           the result of which is located in `./nix/fallback-config.nix`.
         - or a user-created `.nix/config.nix` (which takes priority over
           `./nix/fallback-config.nix` and the `meta.yml` description of
@@ -572,8 +573,9 @@ fields:
               - version:
                   required: false
                   type: string
-                  description: Version number (release, PR, or branch), as documented in
-                               https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq
+                  description: |
+                    Version number (release, PR, or branch), as documented in
+                    https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq
                   default: null
               - job:
                   required: false
