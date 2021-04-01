@@ -526,7 +526,7 @@ fields:
             type: list
             description: |
               The list of jobs to wait for before executing these ones.
-            default: "main"
+            default: "setup"
             item_fields:
               required: false
               type: string
@@ -572,7 +572,8 @@ fields:
               - version:
                   required: false
                   type: string
-                  description: Version number (release, PR, branch or URL)
+                  description: Version number (release, PR, or branch), as documented in
+                               https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq
                   default: null
               - job:
                   required: false
