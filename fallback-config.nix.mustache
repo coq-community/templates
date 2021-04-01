@@ -35,14 +35,14 @@
   ## If not specified, it defaults to "_CoqProject"
   coqproject = "{{coqproject}}{{^coqproject}}_CoqProject"{{/coqproject}};
 
-  ## Select a task to build by default in the following `tasks` set
+  ## Select a bundle to build by default in the following `bundles` set
   ## It will be used when typing nix-shell or nix-build without argument
   ## defaults to "default"
-  default-task = "{{nix-default-task}}{{^nix-default-task}}default{{/nix-default-task}}";
-  tasks."{{nix-default-task}}{{^nix-default-task}}default{{/nix-default-task}}" = {};
+  default-bundle = "{{nix-default-bundle}}{{^nix-default-bundle}}default{{/nix-default-bundle}}";
+  bundles."{{nix-default-bundle}}{{^nix-default-bundle}}default{{/nix-default-bundle}}" = {};
 
-{{#nix-tasks}}
-  tasks."{{task}}" = {
+{{#nix-bundles}}
+  bundles."{{bundle}}" = {
 {{#packages}}
 {{#version}}
       {{location}}{{^location}}coqPackages.{{/location}}"{{name}}".override.version = "{{version}}";
@@ -52,12 +52,12 @@
 {{/job}}
 {{/packages}}
   };
-{{/nix-tasks}}
-{{^nix-tasks}}
-  ## write one `tasks.name` attribute set per
+{{/nix-bundles}}
+{{^nix-bundles}}
+  ## write one `bundles.name` attribute set per
   ## alternative configuration, they can be used to
   ## compute several ci jobs as well
-  tasks.default = {
+  bundles.default = {
 
   ## You can override Coq and other Coq coqPackages
   ## through the following attribute
@@ -89,5 +89,5 @@
   ## nix-build --argstr ci "default" --arg ci-job "test";
 
   };
-{{/nix-tasks}}
+{{/nix-bundles}}
 }

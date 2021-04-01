@@ -494,13 +494,13 @@ fields:
         - nix-action.yml.nix
       description: |
         The generated nix action will use the following job description.
-        Each job contain a number of tasks that are executed in parallel.
-        The tasks must be described in either:
-        - the current `meta.yml` through the attribute: `nix-tasks` (see below),
+        Each job contain a number of bundles that are executed in parallel.
+        The bundles must be described in either:
+        - the current `meta.yml` through the attribute: `nix-bundles` (see below),
           the result of which is located in `./nix/fallback-config.nix`.
         - or a user-created `.nix/config.nix` (which takes priority over
           `./nix/fallback-config.nix` and the `meta.yml` description of
-          `nix-tasks`, so use with caution).
+          `nix-bundles`, so use with caution).
         Otherwise, this attribute cannot be of any use.
         /!\ It is strongly recommended to activate cachix with at least
         /!\ the coq cachix activated `cachix: [ {"name": "coq" } ]``
@@ -511,7 +511,7 @@ fields:
             type: string
             description: |
               The name of the job as described in `.nix/config.nix`
-              as in e.g. tasks.<t>.coqPackages.<mypkg>.ci.job = <job>;
+              as in e.g. bundles.<t>.coqPackages.<mypkg>.ci.job = <job>;
               The default is a `all` job which will run **everything**
             default: "all"
         - name:
@@ -531,26 +531,26 @@ fields:
               required: false
               type: string
               description: A job to wait for
-  - nix-default-task:
+  - nix-default-bundle:
       used:
         - fallback-config.nix
       required: false
-      description: Default task to use when typing nix-shell without arguments
+      description: Default bundle to use when typing nix-shell without arguments
       type: string
       default: "default"
-  - nix-tasks:
+  - nix-bundles:
       used:
         - fallback-config.nix
       description: |
-        Describe a set of tasks to be performed in parallel for each job.
+        Describe a set of bundles to be performed in parallel for each job.
         Suitable to test several versions of dependencies and reverse
         dependencies.
       type: list
       item_fields:
-        - task:
+        - bundle:
             required: true
             type: string
-            description: The name of the task
+            description: The name of the bundle
         - packages:
             required: false
             type: list

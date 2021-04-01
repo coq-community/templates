@@ -15,14 +15,14 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-<%^ nix-tasks%>
+<%^ nix-bundles%>
     outputs:
-      task: ${{ steps.set-matrix.outputs.task }}
-<%/ nix-tasks%>
+      bundle: ${{ steps.set-matrix.outputs.bundle }}
+<%/ nix-bundles%>
     steps:
     - name: Do nothing
-      run: echo "No setup, using meta.yml tasks"
-<%^ nix-tasks%>
+      run: echo "No setup, using meta.yml bundles"
+<%^ nix-bundles%>
     - name: Cachix install
       uses: cachix/install-nix-action@v12
       with:
@@ -51,9 +51,9 @@ jobs:
     - name: Setup build matrix
       id: set-matrix
       run: |
-        tasks=$(nix-shell --arg do-nothing true --run nixTasks)
-        echo ::set-output name=task::$(echo $tasks)
-<%/ nix-tasks%>
+        bundles=$(nix-shell --arg do-nothing true --run nixBundles)
+        echo ::set-output name=bundle::$(echo $bundles)
+<%/ nix-bundles%>
 <%# nix-jobs%>
 
   "<%job%><%^job%><%nix_name%><%^nix_name%><% shortname %><%/nix_name%><%/job%>":
@@ -66,10 +66,10 @@ jobs:
 <%/ needs%>
     strategy:
       matrix:
-        task:<%^ nix-tasks%> ${{fromJson(needs.setup.outputs.task)}}<%/ nix-tasks%>
-<%# nix-tasks%>
-          - "<%task%>"
-<%/ nix-tasks%>
+        bundle:<%^ nix-bundles%> ${{fromJson(needs.setup.outputs.bundle)}}<%/ nix-bundles%>
+<%# nix-bundles%>
+          - "<%bundle%>"
+<%/ nix-bundles%>
     steps:
     - name: Cachix install
       uses: cachix/install-nix-action@v12
@@ -98,25 +98,25 @@ jobs:
 <%/ submodule %>
 <%# needs%>
     - name: Building/fetching previous target <%.%>
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "<%.%>"
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "<%.%>"
 <%/ needs%>
     - name: Building/fetching current CI target
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "<%job%><%^job%><%nix_name%><%^nix_name%><% shortname %><%/nix_name%><%/job%>"
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "<%job%><%^job%><%nix_name%><%^nix_name%><% shortname %><%/nix_name%><%/job%>"
 <%/ nix-jobs%>
 <%^ nix-jobs%>
   "<%nix_name%><%^nix_name%><% shortname %><%/nix_name%>":
     name: Main build
     runs-on: ubuntu-latest
-<%^ nix-tasks%>
+<%^ nix-bundles%>
     needs:
       - setup
-<%/ nix-tasks%>
+<%/ nix-bundles%>
     strategy:
       matrix:
-        task:<%^ nix-tasks%> ${{fromJson(needs.setup.outputs.task)}}<%/ nix-tasks%>
-<%# nix-tasks%>
-          - <%task%>
-<%/ nix-tasks%>
+        bundle:<%^ nix-bundles%> ${{fromJson(needs.setup.outputs.bundle)}}<%/ nix-bundles%>
+<%# nix-bundles%>
+          - <%bundle%>
+<%/ nix-bundles%>
     steps:
     - name: Cachix install
       uses: cachix/install-nix-action@v12
@@ -145,7 +145,7 @@ jobs:
 <%/ submodule %>
 <%! Change delimiters to avoid the next line being parsed as mustache syntax. %>
     - name: Building/fetching dependencies
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "_deps"
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "_deps"
     - name: Building/fetching current project
-      run: nix-build --no-out-link --argstr task "${{ matrix.task }}" --argstr job "<%nix_name%><%^nix_name%><% shortname %><%/nix_name%>"
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "<%nix_name%><%^nix_name%><% shortname %><%/nix_name%>"
 <%/ nix-jobs%>
