@@ -443,3 +443,19 @@ fields:
         - .travis.yml
         - docker-action.yml
         - config.yml
+  - ci_cron_schedule:
+      required: false
+      description: >
+        Schedule for regular actions-based CI runs (in cron syntax).
+        The implied time zone is UTC. There is no default value to
+        keep projects from running their CI all at the same time. See
+        https://crontab.guru/ for a cron expression generator. You can
+        use 'echo "$(shuf -i0-59 -n1) $(shuf -i1-5 -n1) * * *"' to
+        generate a daily schedule starting at a random night-time
+        minute.
+      examples:
+        - '5 4 * * *' #daily at 4:05
+        - '5 4 * * 0' #at 04:05 on Sunday
+      used:
+        - docker-action.yml
+        - nix-action.yml

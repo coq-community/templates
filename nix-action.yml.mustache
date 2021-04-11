@@ -3,6 +3,10 @@
 name: Nix CI
 
 on:
+  {{# ci_cron_schedule }}
+  schedule:
+    - cron: '{{ ci_cron_schedule }}'
+  {{/ ci_cron_schedule }}
   push:
     branches:
       - {{branch}}{{^branch}}master{{/branch}}
