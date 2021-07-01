@@ -1,5 +1,7 @@
 # This file was generated from `meta.yml`, please do not edit manually.
 # Follow the instructions on https://github.com/coq-community/templates to regenerate.
+{{!# From now on we switch template variable syntax to <%X%>}}
+{{=<% %>=}}
 name: Nix CI
 
 on:
@@ -9,35 +11,145 @@ on:
   {{/ ci_cron_schedule }}
   push:
     branches:
-      - {{branch}}{{^branch}}master{{/branch}}
+      - <%branch%><%^branch%>master<%/branch%>
   pull_request:
     branches:
       - '**'
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
+<%^ nix-bundles%>
+    outputs:
+      bundle: ${{ steps.set-matrix.outputs.bundle }}
+<%/ nix-bundles%>
+    steps:
+    - name: Do nothing
+      run: echo "No setup, using meta.yml bundles"
+<%^ nix-bundles%>
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+<%# cachix%>
+    - name: Cachix setup <%name%>
+      uses: cachix/cachix-action@v8
+      with:
+        # Name of a cachix cache to pull/substitute
+        name: <%name%>
+<%# key%>
+        signingKey: '${{ secrets.<%key%> }}'
+<%/ key%>
+<%# token%>
+        authToken: '${{ secrets.<%token%> }}'
+<%/ token%>
+<%/ cachix%>
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+<%# submodule %>
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.1.1
+<%/ submodule %>
+    - name: Setup build matrix
+      id: set-matrix
+      run: |
+        bundles=$(nix-shell --arg do-nothing true --run nixBundles)
+        echo ::set-output name=bundle::$(echo $bundles)
+<%/ nix-bundles%>
+<%# nix-jobs%>
+
+  "<%job%><%^job%><%nix_name%><%^nix_name%><% shortname %><%/nix_name%><%/job%>":
+    <%# name%>name: <%name%>
+    <%/ name%><%^ name%><%/ name%>runs-on: ubuntu-latest
+    needs:
+      - setup
+<%# needs%>
+      - "<%.%>"
+<%/ needs%>
     strategy:
       matrix:
-        version_or_url:
-{{# tested_coq_nix_versions }}
-          - '{{ version_or_url }}'
-{{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}          - 'https://github.com/coq/coq-on-cachix/tarball/master'
-{{/ tested_coq_nix_versions }}
-      fail-fast: false
+        bundle:<%^ nix-bundles%> ${{fromJson(needs.setup.outputs.bundle)}}<%/ nix-bundles%>
+<%# nix-bundles%>
+          - "<%bundle%>"
+<%/ nix-bundles%>
     steps:
-      - uses: cachix/install-nix-action@v12
-        with:
-          nix_path: nixpkgs=channel:nixpkgs-unstable
-      - uses: cachix/cachix-action@v8
-        with:
-          # Name of a cachix cache to pull/substitute
-          name: coq
-      - uses: actions/checkout@v2
-{{# submodule }}
-      - name: Checkout submodules
-        uses: textbook/git-checkout-submodule-action@2.1.1
-{{/ submodule }}
-{{! Change delimiters to avoid the next line being parsed as mustache syntax. }}
-{{=<% %>=}}
-      - run: nix-build --argstr coq-version-or-url "${{ matrix.version_or_url }}"
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+<%# cachix%>
+    - name: Cachix setup <%name%>
+      uses: cachix/cachix-action@v8
+      with:
+        # Name of a cachix cache to pull/substitute
+        name: <%name%>
+<%# key%>
+        signingKey: '${{ secrets.<%key%> }}'
+<%/ key%>
+<%# token%>
+        authToken: '${{ secrets.<%token%> }}'
+<%/ token%>
+<%/ cachix%>
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+<%# submodule %>
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.1.1
+<%/ submodule %>
+<%# needs%>
+    - name: Building/fetching previous target <%.%>
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "<%.%>"
+<%/ needs%>
+    - name: Building/fetching current CI target
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "<%job%><%^job%><%nix_name%><%^nix_name%><% shortname %><%/nix_name%><%/job%>"
+<%/ nix-jobs%>
+<%^ nix-jobs%>
+  "<%nix_name%><%^nix_name%><% shortname %><%/nix_name%>":
+    name: Main build
+    runs-on: ubuntu-latest
+<%^ nix-bundles%>
+    needs:
+      - setup
+<%/ nix-bundles%>
+    strategy:
+      matrix:
+        bundle:<%^ nix-bundles%> ${{fromJson(needs.setup.outputs.bundle)}}<%/ nix-bundles%>
+<%# nix-bundles%>
+          - <%bundle%>
+<%/ nix-bundles%>
+    steps:
+    - name: Cachix install
+      uses: cachix/install-nix-action@v12
+      with:
+        nix_path: nixpkgs=channel:nixpkgs-unstable
+<%# cachix%>
+    - name: Cachix setup <%name%>
+      uses: cachix/cachix-action@v8
+      with:
+        # Name of a cachix cache to pull/substitute
+        name: <%name%>
+<%# key%>
+        signingKey: '${{ secrets.<%key%> }}'
+<%/ key%>
+<%# token%>
+        authToken: '${{ secrets.<%token%> }}'
+<%/ token%>
+<%/ cachix%>
+    - name: Git checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+<%# submodule %>
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@2.1.1
+<%/ submodule %>
+<%! Change delimiters to avoid the next line being parsed as mustache syntax. %>
+    - name: Building/fetching dependencies
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "_deps"
+    - name: Building/fetching current project
+      run: nix-build --no-out-link --argstr bundle "${{ matrix.bundle }}" --argstr job "<%nix_name%><%^nix_name%><% shortname %><%/nix_name%>"
+<%/ nix-jobs%>
