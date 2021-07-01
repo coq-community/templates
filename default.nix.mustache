@@ -18,7 +18,7 @@ let
   };
 {{/ src}}
 in
-(import auto ({inherit src;} // args)).{{attribute}}{{^ attribute}}nix-auto{{/ attribute}}
+(import auto ({inherit src;} // args))
 {{/ nix-default}}
 {{^ nix-default}}
 { config ? {}, withEmacs ? false, print-env ? false, do-nothing ? false,
@@ -31,6 +31,5 @@ let auto = fetchGit {
   ref = "master";
   rev = import ./.nix/coq-nix-toolbox.nix;
 }; in
-(import auto ({inherit src;} // args)).nix-auto
+(import auto ({inherit src;} // args))
 {{/ nix-default}}
-

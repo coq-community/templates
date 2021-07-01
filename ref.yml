@@ -414,7 +414,7 @@ fields:
         - key:
             required: false
             description: |
-              Secret signingKey for the repository.
+              Name of GitHub secret variable containing the Cachix signing key.
               The secret should be generated from https://cachix.org
               and added to Github, either:
               - at the repository level
@@ -428,7 +428,7 @@ fields:
         - token:
             required: false
             description: |
-              Secret authToken for the repository.
+              Name of GitHub secret variable containing the Cachix auth token.
               The secret should be generated from https://cachix.org
               and added to Github, either:
               - at the repository level
