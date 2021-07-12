@@ -19,8 +19,11 @@ description: """
 build: ["dune" "build" "-p" name "-j" jobs]
 {{/ dune }}
 {{^ dune }}
-build: [make "-j%{jobs}%" {{ make_target }}]
-install: [make "install"]
+build: [make "-j%{jobs}%"{{# make_target }} "{{ make_target }}"{{/ make_target }}]
+{{# test_target }}
+run-test: [make "-j%{jobs}%" "{{ test_target }}"]
+{{/ test_target }}
+install: [make "install"{{# install_flag }} "{{ install_flag }}"{{/ install_flag }}]
 {{/ dune }}
 depends: [
 {{# supported_ocaml_versions }}
