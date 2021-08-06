@@ -18,7 +18,6 @@ fields:
         - coq.opam
         - extracted.opam
         - config.yml
-        - default.nix
         - dune
         - dune-project
   - branch:
@@ -64,7 +63,14 @@ fields:
   - nix:
       type: bool
       description: >
-        Set to true to generate a default.nix file and to test it.
+        Set to true to generate Nix-based CI configuration. For now,
+        this is only supported if either:
+        - the project is already available in nixpkgs under shortname
+          (same casing) and the build instructions and dependencies
+          have not changed;
+        - or, the project has no extra dependencies and builds with
+          the standard mechanism (coq_makefile with a _CoqProject
+          file).
       used:
         - README.md
         - .travis.yml
@@ -222,10 +228,6 @@ fields:
             required: true
             used:
               - coq.opam
-  - plugin:
-      type: bool
-      used:
-        - default.nix
   - dependencies:
       type: list
       item_fields:
@@ -242,16 +244,6 @@ fields:
             used:
               - coq.opam
               - extracted.opam
-        - nix:
-            required: true
-            description: >
-              The list of Coq packages in nixpkgs can be seen here:
-              https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/top-level/coq-packages.nix
-              Casing matters and might differ from the opam name.  The
-              leading coq- is present only if it is really an integral
-              part of the package name.
-            used:
-              - default.nix
   - categories:
       required: false
       fields:
@@ -396,22 +388,11 @@ fields:
       type: list
       description: If empty, the master branch of Coq will be tested.
       item_fields:
-        - version_or_url:
+        - version:
             required: true
             description: >
-              This can be a version number of a version packaged in
-              nixpkgs (example: 8.5, 8.11).  Cf. the coqPackages_8_XX
-              attributes defined at the end of this file:
-              https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/top-level/coq-packages.nix
-              (Quote the version number, otherwise '8.10' becomes '8.1'.)
-
-              Or this can be a URL, to test your project with a
-              version of Coq under development.  Typically this is
-              https://github.com/coq/coq-on-cachix/tarball/master but
-              'master' may be replaced by any valid reference like one
-              of the branches available at
-              https://github.com/coq/coq-on-cachix/branches or a valid
-              commit hash.
+              See https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq
+              for the supported syntax.
       used:
         - .travis.yml
         - nix-action.yml
@@ -459,3 +440,27 @@ fields:
       used:
         - docker-action.yml
         - nix-action.yml
+  - cachix:
+      type: list
+      required: false
+      description: >
+        List of Cachix caches to install (to fetch from and optionally
+        to push to). By default, the coq, coq-community and math-comp
+        caches are installed and, if community is set to true, pushing
+        to the coq-community cache is activated.
+      item_fields:
+        - name:
+            required: true
+            description: Name of a public Cachix cache.
+            used:
+              - .travis.yml
+              - nix-action.yml
+        - push:
+            type: bool
+            description: >
+              To activate pushing to the Cachix cache.  This is only
+              supported in GitHub Actions (for now) and requires
+              having set the secret variable CACHIX_AUTH_TOKEN at the
+              repository or organization level.
+            used:
+              - nix-action.yml

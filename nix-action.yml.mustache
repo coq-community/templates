@@ -19,25 +19,42 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version_or_url:
+        coq_version:
 {{# tested_coq_nix_versions }}
-          - '{{ version_or_url }}'
-{{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}          - 'https://github.com/coq/coq-on-cachix/tarball/master'
+          - '{{ version }}'
+{{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}          - 'master'
 {{/ tested_coq_nix_versions }}
       fail-fast: false
     steps:
       - uses: cachix/install-nix-action@v12
         with:
           nix_path: nixpkgs=channel:nixpkgs-unstable
+{{# cachix }}
       - uses: cachix/cachix-action@v8
         with:
-          # Name of a cachix cache to pull/substitute
+          name: {{ name }}
+{{# push }}
+{{! Change delimiters to avoid the curly brackets on the following lines being parsed as mustache syntax. }}
+{{=<% %>=}}
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+<%/ push %>
+<%/ cachix %><%^ cachix %>      - uses: cachix/cachix-action@v8
+        with:
           name: coq
+      - uses: cachix/cachix-action@v8
+        with:
+          name: coq-community
+<%# community %>
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+<%/ community %>
+      - uses: cachix/cachix-action@v8
+        with:
+          name: math-comp
+<%/ cachix %>
       - uses: actions/checkout@v2
-{{# submodule }}
+<%# submodule %>
       - name: Checkout submodules
         uses: textbook/git-checkout-submodule-action@2.1.1
-{{/ submodule }}
-{{! Change delimiters to avoid the next line being parsed as mustache syntax. }}
-{{=<% %>=}}
-      - run: nix-build --argstr coq-version-or-url "${{ matrix.version_or_url }}"
+<%/ submodule %>
+      - run: >
+          nix-build https://coq.inria.fr/nix/toolbox --argstr job <% shortname %> --arg override '{coq = "'${{ matrix.coq_version }}'"; <% shortname %> = builtins.filterSource (path: _: baseNameOf path != ".git") ./.;}'
