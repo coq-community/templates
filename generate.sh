@@ -104,15 +104,6 @@ for f in "$srcdir"/{,.}*.mustache; do
                 continue
             fi
             ;;
-        default.nix)
-            mustache='{{ nix }}'
-            bool=$(get_yaml meta.yml <<<"$mustache")
-            if [ -n "$bool" ] && [ "$bool" != false ]; then
-                : noop
-            else
-                continue
-            fi
-            ;;
     esac
     listed=false
     for specified_target in "$@"; do

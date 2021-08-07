@@ -49,13 +49,20 @@ language: shell
 {{# nix }}
 .nix: &NIX
   language: nix
+  nix: 2.3.7
   install:
   # for cachix we need travis to be a trusted nix user
   - echo "trusted-users = $USER" | sudo tee -a /etc/nix/nix.conf
   - sudo systemctl restart nix-daemon
-  script:
-  - nix-build --argstr coq-version-or-url "$COQ" --extra-substituters https://coq.cachix.org --trusted-public-keys "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= coq.cachix.org-1:5QW/wwEnD+l2jvN6QRbRRsa4hBHG3QiQQ26cxu1F5tI="
-
+  - nix-env -iA nixpkgs.cachix
+{{# cachix }}
+  - cachix use {{ name }}
+{{/ cachix }}{{^ cachix }}  - cachix use coq
+  - cachix use coq-community
+  - cachix use math-comp
+{{/ cachix }}
+  script: >
+    nix-build https://coq.inria.fr/nix/toolbox --argstr job {{ shortname }} --arg override "{ $VERSIONS; {{ shortname }} = builtins.filterSource (path: _: baseNameOf path != \".git\") ./.; }"
 {{/ nix }}
 jobs:
   include:
@@ -64,10 +71,10 @@ jobs:
   # Test supported versions of Coq via Nix
 {{# tested_coq_nix_versions }}
   - env:
-    - COQ={{ version_or_url }}
+    - VERSIONS='coq = "{{ coq_version }}"{{# extra_dev_dependencies }}; {{ nix_name }} = {{ dev_version }}{{^ dev_version }}"master"{{/ dev_version }}{{/ extra_dev_dependencies }}'
     <<: *NIX
 {{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}  - env:
-    - COQ=https://github.com/coq/coq-on-cachix/tarball/master
+    - VERSIONS='coq = "master"'
     <<: *NIX
 {{/ tested_coq_nix_versions }}
 
