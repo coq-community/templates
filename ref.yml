@@ -459,8 +459,8 @@ fields:
         generate a daily schedule starting at a random night-time
         minute.
       examples:
-        - '5 4 * * *' #daily at 4:05
-        - '5 4 * * 0' #at 04:05 on Sunday
+        - '5 4 * * *'  # daily at 4:05
+        - '5 4 * * 0'  # at 04:05 on Sunday
       used:
         - docker-action.yml
         - nix-action.yml
