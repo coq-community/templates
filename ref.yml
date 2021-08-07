@@ -388,11 +388,35 @@ fields:
       type: list
       description: If empty, the master branch of Coq will be tested.
       item_fields:
-        - version:
+        - coq_version:
             required: true
             description: >
               See https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq
               for the supported syntax.
+        - extra_dev_dependencies:
+            type: list
+            description: >
+              To be used if a development version of an extra
+              dependency is needed. In particular, this is required
+              for all dependencies when testing a branch of Coq
+              (instead of a released version).
+            item_fields:
+              - nix_name:
+                  required: true
+                  description: >
+                    Nix package name for the dependency (casing
+                    matters). See a list of available packages at
+                    https://search.nixos.org/packages?channel=unstable&query=coqPackages
+                    Put mathcomp when depending on one or several
+                    mathcomp-* package(s).
+              - dev_version:
+                  required: false
+                  default: master
+                  description: >
+                    Which version to use (generally the branch name or
+                    the PR hash). See
+                    https://nixos.org/manual/nixpkgs/unstable/#sec-language-coq
+                    for the supported syntax.
       used:
         - .travis.yml
         - nix-action.yml

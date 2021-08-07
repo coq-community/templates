@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        coq_version:
+        overrides:
 {{# tested_coq_nix_versions }}
-          - '{{ version }}'
-{{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}          - 'master'
+          - 'coq = "{{ coq_version }}"{{# extra_dev_dependencies }}; {{ nix_name }} = {{ dev_version }}{{^ dev_version }}"master"{{/ dev_version }}{{/ extra_dev_dependencies }}'
+{{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}          - 'coq = "master"'
 {{/ tested_coq_nix_versions }}
       fail-fast: false
     steps:
@@ -57,4 +57,4 @@ jobs:
         uses: textbook/git-checkout-submodule-action@2.1.1
 <%/ submodule %>
       - run: >
-          nix-build https://coq.inria.fr/nix/toolbox --argstr job <% shortname %> --arg override '{coq = "'${{ matrix.coq_version }}'"; <% shortname %> = builtins.filterSource (path: _: baseNameOf path != ".git") ./.;}'
+          nix-build https://coq.inria.fr/nix/toolbox --argstr job <% shortname %> --arg override '{ ${{ matrix.overrides }}; <% shortname %> = builtins.filterSource (path: _: baseNameOf path != ".git") ./.; }'
