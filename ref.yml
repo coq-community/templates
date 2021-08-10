@@ -81,7 +81,10 @@ fields:
         - .travis.yml
   - ci_extra_dev:
       type: bool
+      description: >
+        Set to true to use opam packages from the extra-dev repository.
       used:
+        - docker-action.yml
         - config.yml
         - .travis.yml
   - community:

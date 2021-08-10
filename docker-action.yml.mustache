@@ -37,6 +37,13 @@ jobs:
 {{! Change delimiters to avoid the next line being parsed as mustache syntax. }}
 {{=<% %>=}}
           custom_image: ${{ matrix.image }}
+<%# ci_extra_dev %>
+          before_install: |
+            startGroup "Setup and print opam config"
+              opam repo -a --set-default add coq-extra-dev https://coq.inria.fr/opam/extra-dev
+              opam config list; opam repo list; opam list
+            endGroup
+<%/ ci_extra_dev %>
 
 # See also:
 # https://github.com/coq-community/docker-coq-action#readme
