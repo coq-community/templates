@@ -53,16 +53,11 @@ jobs:
 <%/ push %>
 <%/ cachix %><%^ cachix %>      - uses: cachix/cachix-action@v10
         with:
-          name: coq
-      - uses: cachix/cachix-action@v10
-        with:
           name: coq-community
 <%# community %>
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 <%/ community %>
-      - uses: cachix/cachix-action@v10
-        with:
-          name: math-comp
+          extraPullNames: coq, math-comp
 <%/ cachix %>
       - uses: actions/checkout@v2
         with:
