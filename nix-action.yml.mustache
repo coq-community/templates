@@ -61,7 +61,7 @@ jobs:
 <%/ cachix %>
       - uses: actions/checkout@v2
         with:
-          ref: ${{ env.tested_ref }}
+          ref: ${{ env.tested_commit }}
 <%# submodule %>
           submodules: recursive
 <%/ submodule %>
