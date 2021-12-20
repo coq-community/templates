@@ -28,8 +28,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 {{# submodule }}
-      - name: Checkout submodules
-        uses: textbook/git-checkout-submodule-action@2.1.1
+        with:
+          submodules: recursive
 {{/ submodule }}
       - uses: coq-community/docker-coq-action@v1
         with:
