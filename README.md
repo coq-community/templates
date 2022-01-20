@@ -29,6 +29,7 @@ YAML-compatible mustache implementation such as `ruby-mustache`
 [Debian](https://packages.debian.org/ruby-mustache) package)
 or `mustache-go` (available as a
 [Nix](https://nixos.org/nixos/packages.html?attr=mustache-go&channel=nixpkgs-unstable) package).
+Note that the `mustache` available via opam does *not* work!
 
 ### The `meta.yml` file
 
