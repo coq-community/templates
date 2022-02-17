@@ -10,8 +10,8 @@ Development of OCaml-based tools for supporting advanced version control reposit
 ## Goals
 
 - Define YAML-like file format for describing Coq projects, including projects that have complex packaging and dependencies.
-- Develop OCaml-based command line tool to use files in the specified format for generating repository configuration files and documentation (`README.md`, `coq-project.opam`, etc.)
-- Apply the format and tools on both simple and advanced open source Coq projects
+- Develop OCaml-based command line tool to use files in the specified format for generating repository configuration files and documentation (`README.md`, `coq-project.opam`, etc.).
+- Apply the format and tools on both simple and advanced open source Coq projects.
 
 ## Current Tasks
 
@@ -27,5 +27,5 @@ Development of OCaml-based tools for supporting advanced version control reposit
 
 ## Entity-relationship diagram
 
-<img src="er-diagram.svg" width="400" alt="ER diagram">
+<img src="er-diagram.svg" width="900" alt="ER diagram">
 
