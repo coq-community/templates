@@ -25,6 +25,10 @@ Development of OCaml-based tools for supporting advanced version control reposit
 - [Stalmarck](https://github.com/coq-community/stalmarck) (multi-package Coq library, plugin, and OCaml tool)
 - [MathComp](https://github.com/math-comp/math-comp) (multi-package Coq library)
 
+## Resources
+
+- [OCaml pandoc library](https://github.com/smimram/ocaml-pandoc)
+
 ## Entity-relationship diagram
 
 <img src="er-diagram.svg" width="900" alt="ER diagram">
