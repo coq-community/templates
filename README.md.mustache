@@ -80,7 +80,7 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 
 - Author(s):
 {{# authors }}
-  - {{& name }}{{# initial }} (initial){{/ initial }}
+  - {{& name }}{{# orcid }} [<img src="https://zenodo.org/static/img/orcid.svg" height="14px" alt="ORCID logo" />](https://orcid.org/{{ orcid }}){{/ orcid }}{{# initial }} (initial){{/ initial }}
 {{/ authors }}
 {{& after_authors }}{{# community }}- Coq-community maintainer(s):
 {{# maintainers }}

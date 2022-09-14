@@ -164,6 +164,11 @@ fields:
             used:
               - coq.opam
               - extracted.opam
+        - orcid:
+            required: false
+            used:
+              - README.md
+              - index.md
   - after_authors:
       required: false
       used:
