@@ -87,6 +87,12 @@ fields:
         - docker-action.yml
         - config.yml
         - .travis.yml
+  - action_appendix:
+      description: Append configurations to the GitHub Action.
+      example: |2-
+            export: 'OPAMWITHTEST'
+          env:
+            OPAMWITHTEST: true
   - community:
       type: bool
       description: >
