@@ -79,6 +79,7 @@ fields:
       used:
         - config.yml
         - .travis.yml
+        - docker-action.yml
   - ci_extra_dev:
       type: bool
       description: >
