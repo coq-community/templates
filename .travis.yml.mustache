@@ -62,7 +62,7 @@ language: shell
   - cachix use math-comp
 {{/ cachix }}
   script: >
-    nix-build https://coq.inria.fr/nix/toolbox --argstr job {{ shortname }} --arg override "{ $VERSIONS; {{ shortname }} = builtins.filterSource (path: _: baseNameOf path != \".git\") ./.; }"
+    nix-build https://github.com/coq-community/coq-nix-toolbox/archive/master.tar.gz --argstr job {{ shortname }} --arg override "{ $VERSIONS; {{ shortname }} = builtins.filterSource (path: _: baseNameOf path != \".git\") ./.; }"
 {{/ nix }}
 jobs:
   include:
