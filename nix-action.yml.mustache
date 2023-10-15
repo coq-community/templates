@@ -66,4 +66,4 @@ jobs:
           submodules: recursive
 <%/ submodule %>
       - run: >
-          nix-build https://coq.inria.fr/nix/toolbox --argstr job <% shortname %> --arg override '{ ${{ matrix.overrides }}; <% shortname %> = builtins.filterSource (path: _: baseNameOf path != ".git") ./.; }'
+          nix-build https://github.com/coq-community/coq-nix-toolbox/archive/master.tar.gz --argstr job <% shortname %> --arg override '{ ${{ matrix.overrides }}; <% shortname %> = builtins.filterSource (path: _: baseNameOf path != ".git") ./.; }'
