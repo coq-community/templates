@@ -36,12 +36,12 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 [travis-link]: https://travis-ci.com/{{ organization }}/{{ shortname }}/builds
 {{/ travis }}
 {{# action }}
-[docker-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/Docker%20CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
-[docker-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow:"Docker%20CI"
+[docker-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/actions/workflows/docker-action.yml/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
+[docker-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions/workflows/docker-action.yml
 {{# nix }}
 
-[nix-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/workflows/Nix%20CI/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
-[nix-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions?query=workflow:"Nix%20CI"
+[nix-action-shield]: https://github.com/{{ organization }}/{{ shortname }}/actions/workflows/nix-ci.yml/badge.svg?branch={{branch}}{{^branch}}master{{/branch}}
+[nix-action-link]: https://github.com/{{ organization }}/{{ shortname }}/actions/workflows/nix-ci.yml
 {{/ nix }}
 {{/ action }}
 {{# chat }}
@@ -80,7 +80,7 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 
 - Author(s):
 {{# authors }}
-  - {{& name }}{{# orcid }} [<img src="https://zenodo.org/static/img/orcid.svg" height="14px" alt="ORCID logo" />](https://orcid.org/{{ orcid }}){{/ orcid }}{{# initial }} (initial){{/ initial }}
+  - {{& name }}{{# orcid }} [<img src="https://zenodo.org/static/images/orcid.svg" height="14px" alt="ORCID logo" />](https://orcid.org/{{ orcid }}){{/ orcid }}{{# initial }} (initial){{/ initial }}
 {{/ authors }}
 {{& after_authors }}{{# community }}- Coq-community maintainer(s):
 {{# maintainers }}
