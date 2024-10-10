@@ -22,7 +22,7 @@ jobs:
       matrix:
         overrides:
 {{# tested_coq_nix_versions }}
-          - 'coq = "{{ coq_version }}"{{# extra_dev_dependencies }}; {{ nix_name }} = {{ dev_version }}{{^ dev_version }}"master"{{/ dev_version }}{{/ extra_dev_dependencies }}'
+          - 'coq = "{{ coq_version }}"{{# extra_dev_dependencies }}; {{ nix_name }} = "{{ dev_version }}{{^ dev_version }}master{{/ dev_version }}"{{/ extra_dev_dependencies }}'
 {{/ tested_coq_nix_versions }}{{^ tested_coq_nix_versions }}          - 'coq = "master"'
 {{/ tested_coq_nix_versions }}
       fail-fast: false
