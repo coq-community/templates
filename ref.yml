@@ -103,6 +103,8 @@ fields:
         - index.md
   - coqdoc:
       type: bool
+      description: >
+        Set to true if the project has Coqdoc webpages.
       used:
         - README.md
         - coq.opam

@@ -30,13 +30,15 @@ This is an open source project, licensed under the {{& fullname }}.
 
 The current stable release of {{& fullname }} can be [downloaded from GitHub](https://github.com/{{ organization }}/{{ shortname }}/releases).
 
+{{# coqdoc_index }}
 ## Documentation
 
-{{# coqdoc_index }}
 The coqdoc presentation of the source files can be browsed [here]({{ coqdoc_index }})
 {{/ coqdoc_index }}
 
-Related publications, if any, are listed below.
+{{# publications.length }}
+## Publications
+{{/ publications.length }}
 
 {{# publications }}
 - [{{& pub_title }}]({{ pub_url }}) {{# pub_doi }}doi:[{{ pub_doi }}](https://doi.org/{{ pub_doi }}){{/ pub_doi}}
