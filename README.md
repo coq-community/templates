@@ -13,9 +13,18 @@
 [zulip-shield]: https://img.shields.io/badge/chat-on%20zulip-%23c1272d.svg
 [zulip-link]: https://coq.zulipchat.com/#narrow/stream/237663-coq-community-devs.20.26.20users
 
-This repository contains template files for use in generating configuration files
+Template files for use in generating configuration files
 and other boilerplate for coq-community (or external) Coq projects.
-All content in the repository is licensed under the [Unlicense](LICENSE).
+
+## Meta
+
+- Coq-community maintainers:
+  - Karl Palmskog ([**@palmskog**](https://github.com/palmskog))
+  - Théo Zimmermann ([**@Zimmi48**](https://github.com/Zimmi48))
+  - Yishuai Li ([**@liyishuai**](https://github.com/liyishuai))
+- License: [The Unlicense](LICENSE)
+
+## Building instructions
 
 Files ending in `.mustache` have values to fill in (and the `.mustache`
 extension should be removed from the resulting files). Filling in values
